@@ -1,0 +1,128 @@
+group iQAMobileJUnit;
+
+file(classes, packageName) ::= <<
+package <packageName>;
+
+import java.util.*;
+import com.jayway.android.robotium.solo.*;
+import cc.iqa.runtime.android.*;
+import cc.iqa.library.*;
+import cc.iqa.core.*;
+import com.google.gson.*;
+
+<classes; separator = "\n">
+>>
+
+class(name, methods) ::= <<
+public class <name> extends iQATestBase {
+   private Solo _solo;
+    
+   private ControlNameResolver _resolver;
+
+   public <name>() throws Exception {
+       super("cc.iqa.studio.demo.MainActivity", "cc.iqa.studio.demo"); 
+   }
+
+   public void setUp() throws Exception
+   {
+       ControlNameMap map = new ControlNameMap();
+       this._resolver = map.getResolver();
+       AutomationContext context = new AutomationContext();
+       this._solo = new Solo(this.getInstrumentation(), this.getActivity());
+       context.put("solo", this._solo);
+       this.getContainer().addComponent(context);
+   }
+
+   public void tearDown() throws Exception
+   {
+       this._solo.finishOpenedActivities();
+       this.OnScenarioEnd();
+   }
+
+   <methods; separator = "\n">
+
+   public class ControlNameMap {        
+       private ControlNameResolver _resolver;
+        
+       public ControlNameMap() throws Exception
+       {
+           Gson gson = new Gson();
+           String json = "";
+           this._resolver = gson.fromJson(json, ControlNameResolver.class);
+       }
+        
+       ControlNameResolver getResolver()
+       {
+           return this._resolver;
+       }
+   }
+}
+>>
+
+method(name, instructions) ::= <<
+public void test<name>() throws Exception
+{
+    AutomationContext context = this.getContainer().getComponent(AutomationContext.class);
+    Hashtable\<String, Object\> resolver = null;
+    Hashtable\<String, Object\> variables = new Hashtable\<String, Object\>();
+    <instructions; separator = "\n">
+}
+>>
+
+step(title, table) ::= <<
+<table>
+this.S("<title>");
+>>
+
+bi_expression(left, op, right) ::= <<
+<left> <op> <right>
+>>
+
+define_variable(name, value) ::= <<
+variables.put("<name>", <value>);
+>>
+
+access_variable(name) ::= <<
+variables.get("<name>")
+>>
+
+atom(value) ::= <<
+<value>
+>>
+
+not(expression) ::= <<
+!(<expression>)
+>>
+
+sub(expression) ::= <<
+(<expression>)
+>>
+
+if(condition, instructions, elif_stmt, else_stmt) ::= <<
+if ( <condition> ) {
+   <instructions; separator = "\n">
+}
+<elif_stmt>
+<else_stmt>
+>>
+
+else(instructions) ::= <<
+else {
+   <instructions; separator = "\n">
+}
+>>
+
+elif(condition, instructions) ::= <<
+else if (<condition>) {
+   <instructions; separator = "\n">
+}
+>>
+
+table(name, rows) ::= <<
+Table <name> = new Table();
+<rows; separator = "\n">
+>>
+
+row(table, cells) ::= <<
+<table>.addRow(<cells; separator = ",">);
+>>

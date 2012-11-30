@@ -1,0 +1,75 @@
+group iQAMobileApple;
+
+file(classes, packageName) ::= <<
+#import "lib.js"
+
+<classes; separator = "\n">
+>>
+
+class(name, methods) ::= <<
+var testSuite = function() {
+    var map = { /* need add control map here */ };
+    var testRunner = new TestRunner(map);
+    <methods; separator = "\n">
+}
+>>
+
+method(name, instructions) ::= <<
+this.test<name> = function() {
+    var scenarioInfo = {
+        "title": <name>
+    };
+    testRunner.ScenarioSetup(scenarioInfo);
+
+    <instructions; separator = "\n">
+    testRunner.ScenarioCleanup();
+}
+>>
+
+step(title) ::= <<
+testRunner.Step("<title>");
+>>
+
+bi_expression(left, op, right) ::= <<
+<left> <op> <right>
+>>
+
+define_variable(name, value) ::= <<
+variables.<name> = <value>;
+>>
+
+access_variable(name) ::= <<
+variable.<name>
+>>
+
+atom(value) ::= <<
+<value>
+>>
+
+not(expression) ::= <<
+!(<expression>)
+>>
+
+sub(expression) ::= <<
+(<expression>)
+>>
+
+if(condition, instructions, elif_stmt, else_stmt) ::= <<
+if ( <condition> ) {
+   <instructions; separator = "\n">
+}
+<elif_stmt>
+<else_stmt>
+>>
+
+else(instructions) ::= <<
+else {
+   <instructions; separator = "\n">
+}
+>>
+
+elif(condition, instructions) ::= <<
+else if (<condition>) {
+   <instructions; separator = "\n">
+}
+>>

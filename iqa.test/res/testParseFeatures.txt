@@ -1,0 +1,8 @@
+﻿功能: 鑫财通手机炒股功能测试
+
+功能: 功能测试
+功能: multi word english feature description
+             
+功能: 功能测试
+
+功能: 验证功能关键字后面包含":"冒号
