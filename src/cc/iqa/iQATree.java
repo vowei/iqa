@@ -1,4 +1,4 @@
-// $ANTLR 3.4 cc/iqa/iQATree.g 2012-07-23 17:18:59
+// $ANTLR 3.4 cc/iqa/iQATree.g 2012-11-30 23:17:20
 
 package cc.iqa;
 
@@ -667,8 +667,6 @@ public static class STAttrMap extends HashMap {
                         } else {
                             retval.st = (expression4!=null?expression4.st:null);
                         }
-
-                        // retval.st = (expression4!=null?expression4.st:null);
                     
 
             }
@@ -695,7 +693,7 @@ public static class STAttrMap extends HashMap {
 
 
     // $ANTLR start "row"
-    // cc/iqa/iQATree.g:103:1: row : PIPE (c+= cell )+ -> row(table=getVariableName(\"table\", _tableVariableIndex++)cells=$c);
+    // cc/iqa/iQATree.g:101:1: row : PIPE (c+= cell )+ -> row(table=getVariableName(\"table\", _tableVariableIndex++)cells=$c);
     public final iQATree.row_return row() throws RecognitionException {
         iQATree.row_return retval = new iQATree.row_return();
         retval.start = input.LT(1);
@@ -704,12 +702,12 @@ public static class STAttrMap extends HashMap {
         List list_c=null;
         RuleReturnScope c = null;
         try {
-            // cc/iqa/iQATree.g:104:5: ( PIPE (c+= cell )+ -> row(table=getVariableName(\"table\", _tableVariableIndex++)cells=$c))
-            // cc/iqa/iQATree.g:104:7: PIPE (c+= cell )+
+            // cc/iqa/iQATree.g:102:5: ( PIPE (c+= cell )+ -> row(table=getVariableName(\"table\", _tableVariableIndex++)cells=$c))
+            // cc/iqa/iQATree.g:102:7: PIPE (c+= cell )+
             {
             match(input,PIPE,FOLLOW_PIPE_in_row451); 
 
-            // cc/iqa/iQATree.g:104:14: (c+= cell )+
+            // cc/iqa/iQATree.g:102:14: (c+= cell )+
             int cnt7=0;
             loop7:
             do {
@@ -723,7 +721,7 @@ public static class STAttrMap extends HashMap {
 
                 switch (alt7) {
             	case 1 :
-            	    // cc/iqa/iQATree.g:104:14: c+= cell
+            	    // cc/iqa/iQATree.g:102:14: c+= cell
             	    {
             	    pushFollow(FOLLOW_cell_in_row457);
             	    c=cell();
@@ -748,7 +746,7 @@ public static class STAttrMap extends HashMap {
 
 
             // TEMPLATE REWRITE
-            // 105:9: -> row(table=getVariableName(\"table\", _tableVariableIndex++)cells=$c)
+            // 103:9: -> row(table=getVariableName(\"table\", _tableVariableIndex++)cells=$c)
             {
                 retval.st = templateLib.getInstanceOf("row",new STAttrMap().put("table", getVariableName("table", _tableVariableIndex++)).put("cells", list_c));
             }
@@ -779,7 +777,7 @@ public static class STAttrMap extends HashMap {
 
 
     // $ANTLR start "table"
-    // cc/iqa/iQATree.g:109:1: table : (r+= row )+ -> table(name=getVariableName(\"table\", _tableVariableIndex++)rows=$r);
+    // cc/iqa/iQATree.g:107:1: table : (r+= row )+ -> table(name=getVariableName(\"table\", _tableVariableIndex++)rows=$r);
     public final iQATree.table_return table() throws RecognitionException {
         iQATree.table_return retval = new iQATree.table_return();
         retval.start = input.LT(1);
@@ -788,10 +786,10 @@ public static class STAttrMap extends HashMap {
         List list_r=null;
         RuleReturnScope r = null;
         try {
-            // cc/iqa/iQATree.g:110:5: ( (r+= row )+ -> table(name=getVariableName(\"table\", _tableVariableIndex++)rows=$r))
-            // cc/iqa/iQATree.g:110:7: (r+= row )+
+            // cc/iqa/iQATree.g:108:5: ( (r+= row )+ -> table(name=getVariableName(\"table\", _tableVariableIndex++)rows=$r))
+            // cc/iqa/iQATree.g:108:7: (r+= row )+
             {
-            // cc/iqa/iQATree.g:110:9: (r+= row )+
+            // cc/iqa/iQATree.g:108:9: (r+= row )+
             int cnt8=0;
             loop8:
             do {
@@ -805,7 +803,7 @@ public static class STAttrMap extends HashMap {
 
                 switch (alt8) {
             	case 1 :
-            	    // cc/iqa/iQATree.g:110:9: r+= row
+            	    // cc/iqa/iQATree.g:108:9: r+= row
             	    {
             	    pushFollow(FOLLOW_row_in_table520);
             	    r=row();
@@ -830,7 +828,7 @@ public static class STAttrMap extends HashMap {
 
 
             // TEMPLATE REWRITE
-            // 111:9: -> table(name=getVariableName(\"table\", _tableVariableIndex++)rows=$r)
+            // 109:9: -> table(name=getVariableName(\"table\", _tableVariableIndex++)rows=$r)
             {
                 retval.st = templateLib.getInstanceOf("table",new STAttrMap().put("name", getVariableName("table", _tableVariableIndex++)).put("rows", list_r));
             }
@@ -861,7 +859,7 @@ public static class STAttrMap extends HashMap {
 
 
     // $ANTLR start "compound_stmt"
-    // cc/iqa/iQATree.g:115:1: compound_stmt : ( ^( WHEN c= compound_condition ( suite )+ ( elif_clause )* ( else_clause )? ) -> if(condition=$c.stinstructions=$suite.stmtselif_stmt=$elif_clause.stelse_stmt=$else_clause.st)| step | assignment );
+    // cc/iqa/iQATree.g:113:1: compound_stmt : ( ^( WHEN c= compound_condition ( suite )+ ( elif_clause )* ( else_clause )? ) -> if(condition=$c.stinstructions=$suite.stmtselif_stmt=$elif_clause.stelse_stmt=$else_clause.st)| step | assignment );
     public final iQATree.compound_stmt_return compound_stmt() throws RecognitionException {
         iQATree.compound_stmt_return retval = new iQATree.compound_stmt_return();
         retval.start = input.LT(1);
@@ -881,7 +879,7 @@ public static class STAttrMap extends HashMap {
 
 
         try {
-            // cc/iqa/iQATree.g:116:5: ( ^( WHEN c= compound_condition ( suite )+ ( elif_clause )* ( else_clause )? ) -> if(condition=$c.stinstructions=$suite.stmtselif_stmt=$elif_clause.stelse_stmt=$else_clause.st)| step | assignment )
+            // cc/iqa/iQATree.g:114:5: ( ^( WHEN c= compound_condition ( suite )+ ( elif_clause )* ( else_clause )? ) -> if(condition=$c.stinstructions=$suite.stmtselif_stmt=$elif_clause.stelse_stmt=$else_clause.st)| step | assignment )
             int alt12=3;
             switch ( input.LA(1) ) {
             case WHEN:
@@ -909,7 +907,7 @@ public static class STAttrMap extends HashMap {
 
             switch (alt12) {
                 case 1 :
-                    // cc/iqa/iQATree.g:116:7: ^( WHEN c= compound_condition ( suite )+ ( elif_clause )* ( else_clause )? )
+                    // cc/iqa/iQATree.g:114:7: ^( WHEN c= compound_condition ( suite )+ ( elif_clause )* ( else_clause )? )
                     {
                     match(input,WHEN,FOLLOW_WHEN_in_compound_stmt582); 
 
@@ -920,7 +918,7 @@ public static class STAttrMap extends HashMap {
                     state._fsp--;
 
 
-                    // cc/iqa/iQATree.g:116:35: ( suite )+
+                    // cc/iqa/iQATree.g:114:35: ( suite )+
                     int cnt9=0;
                     loop9:
                     do {
@@ -934,7 +932,7 @@ public static class STAttrMap extends HashMap {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // cc/iqa/iQATree.g:116:35: suite
+                    	    // cc/iqa/iQATree.g:114:35: suite
                     	    {
                     	    pushFollow(FOLLOW_suite_in_compound_stmt588);
                     	    suite5=suite();
@@ -955,7 +953,7 @@ public static class STAttrMap extends HashMap {
                     } while (true);
 
 
-                    // cc/iqa/iQATree.g:116:42: ( elif_clause )*
+                    // cc/iqa/iQATree.g:114:42: ( elif_clause )*
                     loop10:
                     do {
                         int alt10=2;
@@ -968,7 +966,7 @@ public static class STAttrMap extends HashMap {
 
                         switch (alt10) {
                     	case 1 :
-                    	    // cc/iqa/iQATree.g:116:42: elif_clause
+                    	    // cc/iqa/iQATree.g:114:42: elif_clause
                     	    {
                     	    pushFollow(FOLLOW_elif_clause_in_compound_stmt591);
                     	    elif_clause6=elif_clause();
@@ -985,7 +983,7 @@ public static class STAttrMap extends HashMap {
                     } while (true);
 
 
-                    // cc/iqa/iQATree.g:116:55: ( else_clause )?
+                    // cc/iqa/iQATree.g:114:55: ( else_clause )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -994,7 +992,7 @@ public static class STAttrMap extends HashMap {
                     }
                     switch (alt11) {
                         case 1 :
-                            // cc/iqa/iQATree.g:116:55: else_clause
+                            // cc/iqa/iQATree.g:114:55: else_clause
                             {
                             pushFollow(FOLLOW_else_clause_in_compound_stmt594);
                             else_clause7=else_clause();
@@ -1012,7 +1010,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 117:9: -> if(condition=$c.stinstructions=$suite.stmtselif_stmt=$elif_clause.stelse_stmt=$else_clause.st)
+                    // 115:9: -> if(condition=$c.stinstructions=$suite.stmtselif_stmt=$elif_clause.stelse_stmt=$else_clause.st)
                     {
                         retval.st = templateLib.getInstanceOf("if",new STAttrMap().put("condition", (c!=null?c.st:null)).put("instructions", (suite5!=null?suite5.stmts:null)).put("elif_stmt", (elif_clause6!=null?elif_clause6.st:null)).put("else_stmt", (else_clause7!=null?else_clause7.st:null)));
                     }
@@ -1022,7 +1020,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 2 :
-                    // cc/iqa/iQATree.g:121:7: step
+                    // cc/iqa/iQATree.g:119:7: step
                     {
                     pushFollow(FOLLOW_step_in_compound_stmt687);
                     step8=step();
@@ -1037,7 +1035,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 3 :
-                    // cc/iqa/iQATree.g:125:7: assignment
+                    // cc/iqa/iQATree.g:123:7: assignment
                     {
                     pushFollow(FOLLOW_assignment_in_compound_stmt705);
                     assignment9=assignment();
@@ -1075,7 +1073,7 @@ public static class STAttrMap extends HashMap {
 
 
     // $ANTLR start "else_clause"
-    // cc/iqa/iQATree.g:131:1: else_clause : ^( ELSE ( suite )+ ) -> else(instructions=$suite.stmts);
+    // cc/iqa/iQATree.g:129:1: else_clause : ^( ELSE ( suite )+ ) -> else(instructions=$suite.stmts);
     public final iQATree.else_clause_return else_clause() throws RecognitionException {
         iQATree.else_clause_return retval = new iQATree.else_clause_return();
         retval.start = input.LT(1);
@@ -1085,13 +1083,13 @@ public static class STAttrMap extends HashMap {
 
 
         try {
-            // cc/iqa/iQATree.g:132:5: ( ^( ELSE ( suite )+ ) -> else(instructions=$suite.stmts))
-            // cc/iqa/iQATree.g:132:7: ^( ELSE ( suite )+ )
+            // cc/iqa/iQATree.g:130:5: ( ^( ELSE ( suite )+ ) -> else(instructions=$suite.stmts))
+            // cc/iqa/iQATree.g:130:7: ^( ELSE ( suite )+ )
             {
             match(input,ELSE,FOLLOW_ELSE_in_else_clause733); 
 
             match(input, Token.DOWN, null); 
-            // cc/iqa/iQATree.g:132:14: ( suite )+
+            // cc/iqa/iQATree.g:130:14: ( suite )+
             int cnt13=0;
             loop13:
             do {
@@ -1105,7 +1103,7 @@ public static class STAttrMap extends HashMap {
 
                 switch (alt13) {
             	case 1 :
-            	    // cc/iqa/iQATree.g:132:14: suite
+            	    // cc/iqa/iQATree.g:130:14: suite
             	    {
             	    pushFollow(FOLLOW_suite_in_else_clause735);
             	    suite10=suite();
@@ -1130,7 +1128,7 @@ public static class STAttrMap extends HashMap {
 
 
             // TEMPLATE REWRITE
-            // 133:9: -> else(instructions=$suite.stmts)
+            // 131:9: -> else(instructions=$suite.stmts)
             {
                 retval.st = templateLib.getInstanceOf("else",new STAttrMap().put("instructions", (suite10!=null?suite10.stmts:null)));
             }
@@ -1161,7 +1159,7 @@ public static class STAttrMap extends HashMap {
 
 
     // $ANTLR start "elif_clause"
-    // cc/iqa/iQATree.g:136:1: elif_clause : ^( ELIF c= compound_condition ( suite )+ ) -> elif(condition=$c.stinstructions=$suite.stmts);
+    // cc/iqa/iQATree.g:134:1: elif_clause : ^( ELIF c= compound_condition ( suite )+ ) -> elif(condition=$c.stinstructions=$suite.stmts);
     public final iQATree.elif_clause_return elif_clause() throws RecognitionException {
         iQATree.elif_clause_return retval = new iQATree.elif_clause_return();
         retval.start = input.LT(1);
@@ -1173,8 +1171,8 @@ public static class STAttrMap extends HashMap {
 
 
         try {
-            // cc/iqa/iQATree.g:137:5: ( ^( ELIF c= compound_condition ( suite )+ ) -> elif(condition=$c.stinstructions=$suite.stmts))
-            // cc/iqa/iQATree.g:137:7: ^( ELIF c= compound_condition ( suite )+ )
+            // cc/iqa/iQATree.g:135:5: ( ^( ELIF c= compound_condition ( suite )+ ) -> elif(condition=$c.stinstructions=$suite.stmts))
+            // cc/iqa/iQATree.g:135:7: ^( ELIF c= compound_condition ( suite )+ )
             {
             match(input,ELIF,FOLLOW_ELIF_in_elif_clause774); 
 
@@ -1185,7 +1183,7 @@ public static class STAttrMap extends HashMap {
             state._fsp--;
 
 
-            // cc/iqa/iQATree.g:137:35: ( suite )+
+            // cc/iqa/iQATree.g:135:35: ( suite )+
             int cnt14=0;
             loop14:
             do {
@@ -1199,7 +1197,7 @@ public static class STAttrMap extends HashMap {
 
                 switch (alt14) {
             	case 1 :
-            	    // cc/iqa/iQATree.g:137:35: suite
+            	    // cc/iqa/iQATree.g:135:35: suite
             	    {
             	    pushFollow(FOLLOW_suite_in_elif_clause780);
             	    suite11=suite();
@@ -1224,7 +1222,7 @@ public static class STAttrMap extends HashMap {
 
 
             // TEMPLATE REWRITE
-            // 138:9: -> elif(condition=$c.stinstructions=$suite.stmts)
+            // 136:9: -> elif(condition=$c.stinstructions=$suite.stmts)
             {
                 retval.st = templateLib.getInstanceOf("elif",new STAttrMap().put("condition", (c!=null?c.st:null)).put("instructions", (suite11!=null?suite11.stmts:null)));
             }
@@ -1255,7 +1253,7 @@ public static class STAttrMap extends HashMap {
 
 
     // $ANTLR start "compound_condition"
-    // cc/iqa/iQATree.g:142:1: compound_condition : ( expression | assignment );
+    // cc/iqa/iQATree.g:140:1: compound_condition : ( expression | assignment );
     public final iQATree.compound_condition_return compound_condition() throws RecognitionException {
         iQATree.compound_condition_return retval = new iQATree.compound_condition_return();
         retval.start = input.LT(1);
@@ -1267,7 +1265,7 @@ public static class STAttrMap extends HashMap {
 
 
         try {
-            // cc/iqa/iQATree.g:143:5: ( expression | assignment )
+            // cc/iqa/iQATree.g:141:5: ( expression | assignment )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1286,7 +1284,7 @@ public static class STAttrMap extends HashMap {
             }
             switch (alt15) {
                 case 1 :
-                    // cc/iqa/iQATree.g:143:7: expression
+                    // cc/iqa/iQATree.g:141:7: expression
                     {
                     pushFollow(FOLLOW_expression_in_compound_condition840);
                     expression12=expression();
@@ -1301,7 +1299,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 2 :
-                    // cc/iqa/iQATree.g:147:7: assignment
+                    // cc/iqa/iQATree.g:145:7: assignment
                     {
                     pushFollow(FOLLOW_assignment_in_compound_condition859);
                     assignment13=assignment();
@@ -1339,7 +1337,7 @@ public static class STAttrMap extends HashMap {
 
 
     // $ANTLR start "assignment"
-    // cc/iqa/iQATree.g:153:1: assignment : ^( EQUAL n= VARIABLE v= assignment_right ) -> define_variable(name=removeQuote($n.getText(), '[')value=$v.st);
+    // cc/iqa/iQATree.g:151:1: assignment : ^( EQUAL n= VARIABLE v= assignment_right ) -> define_variable(name=removeQuote($n.getText(), '[')value=$v.st);
     public final iQATree.assignment_return assignment() throws RecognitionException {
         iQATree.assignment_return retval = new iQATree.assignment_return();
         retval.start = input.LT(1);
@@ -1350,8 +1348,8 @@ public static class STAttrMap extends HashMap {
 
 
         try {
-            // cc/iqa/iQATree.g:154:5: ( ^( EQUAL n= VARIABLE v= assignment_right ) -> define_variable(name=removeQuote($n.getText(), '[')value=$v.st))
-            // cc/iqa/iQATree.g:154:7: ^( EQUAL n= VARIABLE v= assignment_right )
+            // cc/iqa/iQATree.g:152:5: ( ^( EQUAL n= VARIABLE v= assignment_right ) -> define_variable(name=removeQuote($n.getText(), '[')value=$v.st))
+            // cc/iqa/iQATree.g:152:7: ^( EQUAL n= VARIABLE v= assignment_right )
             {
             match(input,EQUAL,FOLLOW_EQUAL_in_assignment887); 
 
@@ -1368,7 +1366,7 @@ public static class STAttrMap extends HashMap {
 
 
             // TEMPLATE REWRITE
-            // 155:9: -> define_variable(name=removeQuote($n.getText(), '[')value=$v.st)
+            // 153:9: -> define_variable(name=removeQuote($n.getText(), '[')value=$v.st)
             {
                 retval.st = templateLib.getInstanceOf("define_variable",new STAttrMap().put("name", removeQuote(n.getText(), '[')).put("value", (v!=null?v.st:null)));
             }
@@ -1399,7 +1397,7 @@ public static class STAttrMap extends HashMap {
 
 
     // $ANTLR start "assignment_right"
-    // cc/iqa/iQATree.g:158:1: assignment_right : ( expression | step | table | assignment );
+    // cc/iqa/iQATree.g:156:1: assignment_right : ( expression | step | table | assignment );
     public final iQATree.assignment_right_return assignment_right() throws RecognitionException {
         iQATree.assignment_right_return retval = new iQATree.assignment_right_return();
         retval.start = input.LT(1);
@@ -1415,7 +1413,7 @@ public static class STAttrMap extends HashMap {
 
 
         try {
-            // cc/iqa/iQATree.g:159:5: ( expression | step | table | assignment )
+            // cc/iqa/iQATree.g:157:5: ( expression | step | table | assignment )
             int alt16=4;
             switch ( input.LA(1) ) {
             case ADD:
@@ -1463,7 +1461,7 @@ public static class STAttrMap extends HashMap {
 
             switch (alt16) {
                 case 1 :
-                    // cc/iqa/iQATree.g:159:7: expression
+                    // cc/iqa/iQATree.g:157:7: expression
                     {
                     pushFollow(FOLLOW_expression_in_assignment_right939);
                     expression14=expression();
@@ -1478,7 +1476,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 2 :
-                    // cc/iqa/iQATree.g:163:7: step
+                    // cc/iqa/iQATree.g:161:7: step
                     {
                     pushFollow(FOLLOW_step_in_assignment_right957);
                     step15=step();
@@ -1493,7 +1491,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 3 :
-                    // cc/iqa/iQATree.g:167:7: table
+                    // cc/iqa/iQATree.g:165:7: table
                     {
                     pushFollow(FOLLOW_table_in_assignment_right975);
                     table16=table();
@@ -1508,7 +1506,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 4 :
-                    // cc/iqa/iQATree.g:171:7: assignment
+                    // cc/iqa/iQATree.g:169:7: assignment
                     {
                     pushFollow(FOLLOW_assignment_in_assignment_right993);
                     assignment17=assignment();
@@ -1546,7 +1544,7 @@ public static class STAttrMap extends HashMap {
 
 
     // $ANTLR start "expression"
-    // cc/iqa/iQATree.g:177:1: expression : ( ^(o= OR l= expression r= expression ) -> bi_expression(left=$l.stop=\"||\"right=$r.st)| ^(o= AND l= expression r= expression ) -> bi_expression(left=$l.stop=\"&&\"right=$r.st)| ^(o= EOP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^( NOT v= expression ) -> not(expression=$v.st)| ^(o= COP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= SOP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= ADD l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= SUB l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= MUL l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= DIV l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= MOD l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| IDENTIFIER -> atom(value=$IDENTIFIER.text)| FLOAT -> atom(value=$FLOAT.text)| VARIABLE -> access_variable(name=removeQuote($VARIABLE.getText(), '['))| STRING -> atom(value=$STRING.text)| ^( SUB_EXPR v= expression ) -> sub(expression=$v.st));
+    // cc/iqa/iQATree.g:175:1: expression : ( ^(o= OR l= expression r= expression ) -> bi_expression(left=$l.stop=\"||\"right=$r.st)| ^(o= AND l= expression r= expression ) -> bi_expression(left=$l.stop=\"&&\"right=$r.st)| ^(o= EOP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^( NOT v= expression ) -> not(expression=$v.st)| ^(o= COP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= SOP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= ADD l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= SUB l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= MUL l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= DIV l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= MOD l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| IDENTIFIER -> atom(value=$IDENTIFIER.text)| FLOAT -> atom(value=$FLOAT.text)| VARIABLE -> access_variable(name=removeQuote($VARIABLE.getText(), '['))| STRING -> atom(value=$STRING.text)| ^( SUB_EXPR v= expression ) -> sub(expression=$v.st));
     public final iQATree.expression_return expression() throws RecognitionException {
         iQATree.expression_return retval = new iQATree.expression_return();
         retval.start = input.LT(1);
@@ -1565,7 +1563,7 @@ public static class STAttrMap extends HashMap {
 
 
         try {
-            // cc/iqa/iQATree.g:178:5: ( ^(o= OR l= expression r= expression ) -> bi_expression(left=$l.stop=\"||\"right=$r.st)| ^(o= AND l= expression r= expression ) -> bi_expression(left=$l.stop=\"&&\"right=$r.st)| ^(o= EOP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^( NOT v= expression ) -> not(expression=$v.st)| ^(o= COP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= SOP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= ADD l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= SUB l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= MUL l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= DIV l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= MOD l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| IDENTIFIER -> atom(value=$IDENTIFIER.text)| FLOAT -> atom(value=$FLOAT.text)| VARIABLE -> access_variable(name=removeQuote($VARIABLE.getText(), '['))| STRING -> atom(value=$STRING.text)| ^( SUB_EXPR v= expression ) -> sub(expression=$v.st))
+            // cc/iqa/iQATree.g:176:5: ( ^(o= OR l= expression r= expression ) -> bi_expression(left=$l.stop=\"||\"right=$r.st)| ^(o= AND l= expression r= expression ) -> bi_expression(left=$l.stop=\"&&\"right=$r.st)| ^(o= EOP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^( NOT v= expression ) -> not(expression=$v.st)| ^(o= COP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= SOP l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= ADD l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= SUB l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= MUL l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= DIV l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| ^(o= MOD l= expression r= expression ) -> bi_expression(left=$l.stop=$o.getText()right=$r.st)| IDENTIFIER -> atom(value=$IDENTIFIER.text)| FLOAT -> atom(value=$FLOAT.text)| VARIABLE -> access_variable(name=removeQuote($VARIABLE.getText(), '['))| STRING -> atom(value=$STRING.text)| ^( SUB_EXPR v= expression ) -> sub(expression=$v.st))
             int alt17=16;
             switch ( input.LA(1) ) {
             case OR:
@@ -1658,7 +1656,7 @@ public static class STAttrMap extends HashMap {
 
             switch (alt17) {
                 case 1 :
-                    // cc/iqa/iQATree.g:178:7: ^(o= OR l= expression r= expression )
+                    // cc/iqa/iQATree.g:176:7: ^(o= OR l= expression r= expression )
                     {
                     o=(CommonTree)match(input,OR,FOLLOW_OR_in_expression1023); 
 
@@ -1679,7 +1677,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 179:9: -> bi_expression(left=$l.stop=\"||\"right=$r.st)
+                    // 177:9: -> bi_expression(left=$l.stop=\"||\"right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", "||").put("right", (r!=null?r.st:null)));
                     }
@@ -1689,7 +1687,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 2 :
-                    // cc/iqa/iQATree.g:180:7: ^(o= AND l= expression r= expression )
+                    // cc/iqa/iQATree.g:178:7: ^(o= AND l= expression r= expression )
                     {
                     o=(CommonTree)match(input,AND,FOLLOW_AND_in_expression1076); 
 
@@ -1710,7 +1708,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 181:9: -> bi_expression(left=$l.stop=\"&&\"right=$r.st)
+                    // 179:9: -> bi_expression(left=$l.stop=\"&&\"right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", "&&").put("right", (r!=null?r.st:null)));
                     }
@@ -1720,7 +1718,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 3 :
-                    // cc/iqa/iQATree.g:182:7: ^(o= EOP l= expression r= expression )
+                    // cc/iqa/iQATree.g:180:7: ^(o= EOP l= expression r= expression )
                     {
                     o=(CommonTree)match(input,EOP,FOLLOW_EOP_in_expression1129); 
 
@@ -1741,7 +1739,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 183:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
+                    // 181:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", o.getText()).put("right", (r!=null?r.st:null)));
                     }
@@ -1751,7 +1749,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 4 :
-                    // cc/iqa/iQATree.g:184:7: ^( NOT v= expression )
+                    // cc/iqa/iQATree.g:182:7: ^( NOT v= expression )
                     {
                     match(input,NOT,FOLLOW_NOT_in_expression1180); 
 
@@ -1766,7 +1764,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 185:9: -> not(expression=$v.st)
+                    // 183:9: -> not(expression=$v.st)
                     {
                         retval.st = templateLib.getInstanceOf("not",new STAttrMap().put("expression", (v!=null?v.st:null)));
                     }
@@ -1776,7 +1774,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 5 :
-                    // cc/iqa/iQATree.g:186:7: ^(o= COP l= expression r= expression )
+                    // cc/iqa/iQATree.g:184:7: ^(o= COP l= expression r= expression )
                     {
                     o=(CommonTree)match(input,COP,FOLLOW_COP_in_expression1215); 
 
@@ -1797,7 +1795,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 187:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
+                    // 185:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", o.getText()).put("right", (r!=null?r.st:null)));
                     }
@@ -1807,7 +1805,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 6 :
-                    // cc/iqa/iQATree.g:188:7: ^(o= SOP l= expression r= expression )
+                    // cc/iqa/iQATree.g:186:7: ^(o= SOP l= expression r= expression )
                     {
                     o=(CommonTree)match(input,SOP,FOLLOW_SOP_in_expression1268); 
 
@@ -1828,7 +1826,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 189:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
+                    // 187:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", o.getText()).put("right", (r!=null?r.st:null)));
                     }
@@ -1838,7 +1836,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 7 :
-                    // cc/iqa/iQATree.g:190:7: ^(o= ADD l= expression r= expression )
+                    // cc/iqa/iQATree.g:188:7: ^(o= ADD l= expression r= expression )
                     {
                     o=(CommonTree)match(input,ADD,FOLLOW_ADD_in_expression1321); 
 
@@ -1859,7 +1857,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 191:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
+                    // 189:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", o.getText()).put("right", (r!=null?r.st:null)));
                     }
@@ -1869,7 +1867,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 8 :
-                    // cc/iqa/iQATree.g:192:7: ^(o= SUB l= expression r= expression )
+                    // cc/iqa/iQATree.g:190:7: ^(o= SUB l= expression r= expression )
                     {
                     o=(CommonTree)match(input,SUB,FOLLOW_SUB_in_expression1374); 
 
@@ -1890,7 +1888,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 193:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
+                    // 191:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", o.getText()).put("right", (r!=null?r.st:null)));
                     }
@@ -1900,7 +1898,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 9 :
-                    // cc/iqa/iQATree.g:194:7: ^(o= MUL l= expression r= expression )
+                    // cc/iqa/iQATree.g:192:7: ^(o= MUL l= expression r= expression )
                     {
                     o=(CommonTree)match(input,MUL,FOLLOW_MUL_in_expression1427); 
 
@@ -1921,7 +1919,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 195:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
+                    // 193:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", o.getText()).put("right", (r!=null?r.st:null)));
                     }
@@ -1931,7 +1929,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 10 :
-                    // cc/iqa/iQATree.g:196:7: ^(o= DIV l= expression r= expression )
+                    // cc/iqa/iQATree.g:194:7: ^(o= DIV l= expression r= expression )
                     {
                     o=(CommonTree)match(input,DIV,FOLLOW_DIV_in_expression1480); 
 
@@ -1952,7 +1950,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 197:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
+                    // 195:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", o.getText()).put("right", (r!=null?r.st:null)));
                     }
@@ -1962,7 +1960,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 11 :
-                    // cc/iqa/iQATree.g:198:7: ^(o= MOD l= expression r= expression )
+                    // cc/iqa/iQATree.g:196:7: ^(o= MOD l= expression r= expression )
                     {
                     o=(CommonTree)match(input,MOD,FOLLOW_MOD_in_expression1533); 
 
@@ -1983,7 +1981,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 199:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
+                    // 197:9: -> bi_expression(left=$l.stop=$o.getText()right=$r.st)
                     {
                         retval.st = templateLib.getInstanceOf("bi_expression",new STAttrMap().put("left", (l!=null?l.st:null)).put("op", o.getText()).put("right", (r!=null?r.st:null)));
                     }
@@ -1993,12 +1991,12 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 12 :
-                    // cc/iqa/iQATree.g:200:7: IDENTIFIER
+                    // cc/iqa/iQATree.g:198:7: IDENTIFIER
                     {
                     IDENTIFIER18=(CommonTree)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression1583); 
 
                     // TEMPLATE REWRITE
-                    // 201:9: -> atom(value=$IDENTIFIER.text)
+                    // 199:9: -> atom(value=$IDENTIFIER.text)
                     {
                         retval.st = templateLib.getInstanceOf("atom",new STAttrMap().put("value", (IDENTIFIER18!=null?IDENTIFIER18.getText():null)));
                     }
@@ -2008,12 +2006,12 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 13 :
-                    // cc/iqa/iQATree.g:202:7: FLOAT
+                    // cc/iqa/iQATree.g:200:7: FLOAT
                     {
                     FLOAT19=(CommonTree)match(input,FLOAT,FOLLOW_FLOAT_in_expression1610); 
 
                     // TEMPLATE REWRITE
-                    // 203:9: -> atom(value=$FLOAT.text)
+                    // 201:9: -> atom(value=$FLOAT.text)
                     {
                         retval.st = templateLib.getInstanceOf("atom",new STAttrMap().put("value", (FLOAT19!=null?FLOAT19.getText():null)));
                     }
@@ -2023,12 +2021,12 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 14 :
-                    // cc/iqa/iQATree.g:204:7: VARIABLE
+                    // cc/iqa/iQATree.g:202:7: VARIABLE
                     {
                     VARIABLE20=(CommonTree)match(input,VARIABLE,FOLLOW_VARIABLE_in_expression1637); 
 
                     // TEMPLATE REWRITE
-                    // 205:9: -> access_variable(name=removeQuote($VARIABLE.getText(), '['))
+                    // 203:9: -> access_variable(name=removeQuote($VARIABLE.getText(), '['))
                     {
                         retval.st = templateLib.getInstanceOf("access_variable",new STAttrMap().put("name", removeQuote(VARIABLE20.getText(), '[')));
                     }
@@ -2038,12 +2036,12 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 15 :
-                    // cc/iqa/iQATree.g:206:7: STRING
+                    // cc/iqa/iQATree.g:204:7: STRING
                     {
                     STRING21=(CommonTree)match(input,STRING,FOLLOW_STRING_in_expression1664); 
 
                     // TEMPLATE REWRITE
-                    // 207:9: -> atom(value=$STRING.text)
+                    // 205:9: -> atom(value=$STRING.text)
                     {
                         retval.st = templateLib.getInstanceOf("atom",new STAttrMap().put("value", (STRING21!=null?STRING21.getText():null)));
                     }
@@ -2053,7 +2051,7 @@ public static class STAttrMap extends HashMap {
                     }
                     break;
                 case 16 :
-                    // cc/iqa/iQATree.g:208:7: ^( SUB_EXPR v= expression )
+                    // cc/iqa/iQATree.g:206:7: ^( SUB_EXPR v= expression )
                     {
                     match(input,SUB_EXPR,FOLLOW_SUB_EXPR_in_expression1692); 
 
@@ -2068,7 +2066,7 @@ public static class STAttrMap extends HashMap {
 
 
                     // TEMPLATE REWRITE
-                    // 209:9: -> sub(expression=$v.st)
+                    // 207:9: -> sub(expression=$v.st)
                     {
                         retval.st = templateLib.getInstanceOf("sub",new STAttrMap().put("expression", (v!=null?v.st:null)));
                     }

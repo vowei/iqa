@@ -1,5 +1,4 @@
 编译命令：
-	java -cp lib/antlr-3.4-complete.jar org.antlr.Tool cc/iqa/iQA.g
 	java -cp lib/antlr-3.4-complete.jar org.antlr.Tool cc/iqa/iQALexer.g
 	java -cp lib/antlr-3.4-complete.jar org.antlr.Tool cc/iqa/iQAParser.g
 	java -cp lib/antlr-3.4-complete.jar org.antlr.Tool cc/iqa/iQATree.g
