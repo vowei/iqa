@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="toast"
+      version="1.0.0">
+    <name>toast</name>
+    <description>Cordova toast Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,toast</keywords>
+
+    <engines>
+      <engine name="cordova-android" version=">=4.0.0-dev" />
+    </engines>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+           <feature name="ToastPlugin" >
+                <param
+                    name="android-package"
+                    value="com.hy.todos.plugins.ToastPlugin" />
+            </feature>
+            <feature name="MessagePlugin" >
+                <param
+                    name="android-package"
+                    value="com.hy.todos.plugins.MessagePlugin" />
+            </feature>
+        </config-file>
+    </platform>
+</plugin>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Local Storage Demo</title>
+</head>
+<body>
+    <script type="text/javascript">
+        // 显示存储事件的相关内容
+        function handleStorageEvent(e) {
+            console.log("key" + e.key + "oldValue" + e.oldValue + "newValue" + e.newValue);
+        };
+
+        // 添加存储事件监听
+        window.addEventListener("storage", handleStorageEvent, false);
+
+        function update() {
+            window.localStorage["demo"] = document.getElementById("txtTest").value;
+        };
+
+        function clearStorage() {
+            window.localStorage.clear();
+        };
+
+        function display() {
+            window.alert(window.localStorage["demo"]);
+        };
+    </script>
+
+    <input type="text" id="txtTest" />
+    <input type="button" id="btnOk" value="Update" onclick="javascript: update();" />
+    <input type="button" id="btnDisplay" value="Display" onclick="javascript: display();" />
+    <input type="button" id="btnClear" value="Clear" onclick="javascript: clearStorage();" />
+</body>
+</html>

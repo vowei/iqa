@@ -1,0 +1,20 @@
+﻿<html ng-app="phonecatApp">
+<head>
+  <link rel="stylesheet" href="../css/app.css">
+  <script src="../lib/angular.js"></script>
+  <script src="js/controller.js"></script>
+</head>
+<body ng-controller="PhoneListCtrl">
+  Name: <input type="text" ng-model="name" /> {{ name }}
+  <ul>
+    <li ng-repeat="phone in phones">
+      {{phone.name}}
+      <p>{{phone.snippet}}</p>
+    </li>
+  </ul>
+  <span style="color: red" >{{ name * 2 }}</span>
+</body>
+</html>
+
+
+

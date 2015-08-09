@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>我的关注</title>
+<script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile-1.3.2.css">
+<script type="text/javascript" charset="utf-8" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/Toast-Plugin.js"></script>
+</head>
+<style>
+ body *{
+ 	-webkit-user-select:none;	
+  }
+</style>
+<body>
+	<div data-role="page" id="page">
+	 	<div data-role="header" data-position="fixed" data-theme="a">
+	 	    <input type="button" name="Submit" data-icon="arrow-l" value="返回" class="ui-btn-left" onclick="javascript:location.href='../html/home_page.html'" /> 
+	 		<h1>我的关注</h1>
+	 		<div data-role="navbar">
+              <ul>
+               <li><input type="button" id="Inspection" name="Inspection" value="巡检任务" /> </li>
+               <li><input type="button" id="Supervision" name="Supervision" value="监督任务" /></li>
+              </ul>
+            </div>
+	 	</div>
+	 	<div data-role="content" id="content1">
+		 <ul data-role="listview" id="list"> 
+         </ul>
+         </div>
+        <div data-role="footer" data-position="fixed" data-theme="a" style="display:none;">
+        <input type="button"  class="caa" value="取消关注" ide="del">
+        </div> 
+     </div>
+</body>
+<script type="text/jscript" language="javascript">                    
+ var token;
+ var aba;
+ var aaa;
+ document.addEventListener("deviceready",onDeviceReady,false);
+function onDeviceReady() {
+         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+	}
+function jiazai(){
+ 	$.ajax({
+           url:"http://webapi.vikvon.com:80/Device/GetDeviceFollowRecordList",
+           type:"get",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",       
+           success: function (response){
+                            var con='';
+                          var data = response.data;
+                          for (var l in data){
+                          	var ti = eval("data["+l+"].record.shortTitle");
+                          	var idd=eval("data["+l+"].record.id");                          	
+                          	var di=eval("data["+l+"].id");
+                          	var time=eval("data["+l+"].record.reportTime");
+                          	con=con+"<li class='tocuh' id='"+idd+"' id1='"+di+"'>";
+                          	con=con+"<a data-role='button'>";
+                          	con=con+ti;
+                          	con=con+"</a>";
+                          	con=con+"<p>";
+                          	con=con+"记录时间："+time;
+                          	con=con+"</p>";
+                          	con=con+"</li>";
+                          	                 }
+                           $("#list").empty().append(con).listview('refresh');
+                                       },
+           error: function (response) {console.log(response.responseText);}
+           });
+                $(document).ready(function(){tiao();thoo(); });           
+ }
+//点击巡检任务请求数据并显示
+  $("#Inspection").click(function(){
+ 	$.ajax({
+           url:"http://webapi.vikvon.com:80/Device/GetDeviceFollowRecordList",
+           type:"get",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",       
+           success: function (response){
+                           alert(response.returnStatus);
+                            var con='';
+                          var data = response.data;
+                          for (var l in data){
+                          	var ti = eval("data["+l+"].record.shortTitle");
+                          	var idd=eval("data["+l+"].record.id");                          	
+                          	var di=eval("data["+l+"].id");
+                          	var time=eval("data["+l+"].record.reportTime");
+                          	con=con+"<li class='tocuh' id='"+idd+"' id1='"+di+"'>";
+                          	con=con+"<a data-role='button'>";
+                          	con=con+ti;
+                          	con=con+"</a>";
+                          	con=con+"<p>";
+                          	con=con+"记录时间："+time;
+                          	con=con+"</p>";
+                          	con=con+"</li>";
+                          	                 }
+                           $("#list").empty().append(con).listview('refresh');
+                                       },
+           error: function (response) {console.log(response.responseText);}
+           });
+            $(document).ready(function(){tiao();thoo(); });                  
+});
+
+ //点击监督任务请求数据并显示
+  $("#Supervision").click(function(){
+ 	$.ajax({
+           url:"http://webapi.vikvon.com:80/MonitorAcceptance/GetMonitorFollowRecordList",
+           type:"get",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",       
+           success: function (response){
+                           alert(response.returnStatus);
+                            var con='';
+                          var data = response.data;
+                          for (var l in data){
+                          	var ti = eval("data["+l+"].record.shortTitle");
+                          	var idd=eval("data["+l+"].record.id");                          	
+                          	var di=eval("data["+l+"].id");
+                          	var time=eval("data["+l+"].record.reportTime");
+                          	con=con+"<li class='tocuh' id='"+idd+"' id1='"+di+"'>";
+                          	con=con+"<a data-role='button'>";
+                          	con=con+ti;
+                          	con=con+"</a>";
+                          	con=con+"<p>";
+                          	con=con+"记录时间："+time;
+                          	con=con+"</p>";
+                          	con=con+"</li>";
+                          	                 }
+                           $("#list").empty().append(con).listview('refresh');
+                                       },
+           error: function (response) {console.log(response.responseText);}
+           });                  
+                 $(document).ready(function(){tiao1();thoo1(); });
+});
+ 
+ 
+ // 获取nanhuAPPFile目录   
+function gotFS(fileSystem) {
+     newFile = fileSystem.root.getDirectory("nanhuAPPFile",null,readerFile,fail);         
+       }    
+//获取nanhuAPPFile目录下面的nanhuAPPtoken.txt文件
+function readerFile(newFile) {
+     newFile.getFile("nanhuAPPtoken.txt",null,gotFileEntry, fail);    
+       }    
+function gotFileEntry(fileEntry) {
+     fileEntry.file(gotFile, fail);    
+       }   
+function gotFile(file){ 
+     readAsText(file);   
+       }    
+function readAsText(file) {
+     var reader = new FileReader();   
+     reader.onloadend = function(txt) {  
+        token=txt.target.result;
+        jiazai();
+                };   
+           reader.readAsText(file);
+            }     
+function fail(txt) { 
+       console.log(txt.target.error.code);   
+            } 
+//设备巡检任务调转详情界面 
+function tiao(){
+         $(".tocuh").click(function(){  
+             var ll=$(this).attr("id");
+	         location.href="SBXQ.html?id="+ll;
+	         });	
+}
+//取消关注设备巡检任务 
+function thoo(){
+         $(".tocuh").on("taphold", function() {
+              aba=$(this).attr("id1");
+            $("[data-role='footer']").attr("style","display:block;");
+            $(".caa").unbind('click').bind('click',(function(){
+                  aaa=$(this).attr("ide");
+                  //取消关注操作
+                 if(aaa=="del"){
+                     $.ajax({
+                      url:"http://webapi.vikvon.com:80/Device/removeFollowingRecords?ids="+aba,
+                      type:"post",
+                      beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+                      async:false,
+                      data:aba,
+                      contentType: "application/json; charset=utf-8",
+                      success: function (response)  {
+                            console.log(response);
+                            if(response.message==null){
+                                    $("[id1="+aba+"]").hide();
+                                    window.plugins.toast.shortshow( "取消关注成功！" );
+                                    $("[data-role='footer']").attr("style","display:none;");
+                                                      }
+                             else{
+                                    window.plugins.toast.shortshow(response.massage);
+                                    $("[data-role='footer']").attr("style","display:none;");
+                                                           }
+                                                    },
+                      error: function (response) {
+                            console.log(response.responseText);
+                                                 },
+                      dataType: "json",
+                    });  
+                 }
+                     }));
+          });
+}
+//监督管理任务调转详情界面 
+function tiao1(){
+         $(".tocuh").click(function(){  
+             var ll=$(this).attr("id");
+	         location.href="JDXQ.html?id="+ll;
+	         });	
+}
+//监督管理设备巡检任务 
+function thoo1(){
+         $(".tocuh").on("taphold", function() {
+              aba=$(this).attr("id1");
+            $("[data-role='footer']").attr("style","display:block;");
+            $(".caa").unbind('click').bind('click',(function(){
+                  aaa=$(this).attr("ide");
+                  //取消关注操作
+                 if(aaa=="del"){
+                     $.ajax({
+                      url:"http://webapi.vikvon.com:80/MonitorAcceptance/removeFollowingRecords?ids="+aba,
+                      type:"post",
+                      beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+                      async:false,
+                      data:aba,
+                      contentType: "application/json; charset=utf-8",
+                      success: function (response)  {
+                            console.log(response);
+                            if(response.message==null){
+                                    $("[id1="+aba+"]").hide();
+                                    window.plugins.toast.shortshow( "取消关注成功！" );
+                                    $("[data-role='footer']").attr("style","display:none;");
+                                                      }
+                             else{
+                                    window.plugins.toast.shortshow(response.massage);
+                                    $("[data-role='footer']").attr("style","display:none;");
+                                                           }
+                                                    },
+                      error: function (response) {
+                            console.log(response.responseText);
+                                                 },
+                      dataType: "json",
+                    });  
+                 }
+                     }));
+          });
+}
+</script>
+</html>

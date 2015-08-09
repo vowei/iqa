@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6I4apTg7ZPYGGq3xnWi2EKoL"></script>
+	<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+	<title>GPS转百度</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+function GetQueryString(id) {
+    var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)","i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r!=null) return (r[2]); return null;
+	}
+	var loc=GetQueryString("id");
+	var loce=decodeURI(loc);
+	var geotion=GetQueryString("geotion");
+	var geotiong=decodeURI(geotion);
+	var result = loce.split(",");
+	// 百度地图API功能
+	//GPS坐标
+	
+	var yy = result[0];
+	var xx = result[1];
+	
+	function ZoomControl(){
+	  // 默认停靠位置和偏移量
+	  this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
+	  this.defaultOffset = new BMap.Size(10, 10);
+	}
+  ZoomControl.prototype = new BMap.Control();
+  ZoomControl.prototype.initialize = function(map){
+	  // 创建一个DOM元素
+	  var div = document.createElement("div");
+	  // 添加文字说明
+	  div.appendChild(document.createTextNode("返回"));
+	  // 设置样式
+	  div.style.cursor = "pointer";
+	  div.style.border = "1px solid gray";
+	  div.style.backgroundColor = "white";
+	  // 绑定事件
+	  div.onclick = function(e){
+		//map.setZoom(map.getZoom() + 2);
+		if(temp=="newadd"){
+			window.location.href = "newAdd.html?ti="+ti+"&description="+description;
+		}else{
+			window.location.href = "Newsuper.html?ti="+ti+"&description="+description;
+			}
+	  }
+	  // 添加DOM元素到地图中
+	  map.getContainer().appendChild(div);
+	  // 将DOM元素返回
+	  return div;
+	}
+	
+	var gpsPoint = new BMap.Point(xx,yy);
+
+	//地图初始化
+	var bm = new BMap.Map("allmap");
+	bm.centerAndZoom(gpsPoint, 15);
+	bm.addControl(new BMap.NavigationControl());
+	
+	//坐标转换完之后的回调函数
+	translateCallback = function (point){
+		var marker = new BMap.Marker(point);
+		bm.addOverlay(marker);
+		var label = new BMap.Label(geotiong,{offset:new BMap.Size(20,-10)});
+		marker.setLabel(label); //添加百度label
+		bm.setCenter(point);
+	}
+
+	setTimeout(function(){
+		BMap.Convertor.translate(gpsPoint,0,translateCallback);     //真实经纬度转成百度坐标
+	}, 2000);
+	
+	
+</script>

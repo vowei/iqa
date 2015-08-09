@@ -1,0 +1,9 @@
+# view AndroidManifest.xml #generated:33
+-keep class cn.hzbook.android.test.chapter1.BookDetails { <init>(...); }
+
+# view AndroidManifest.xml #generated:29
+-keep class cn.hzbook.android.test.chapter1.BookEditor { <init>(...); }
+
+# view AndroidManifest.xml #generated:20
+-keep class cn.hzbook.android.test.chapter1.MainActivity { <init>(...); }
+

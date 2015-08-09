@@ -1,0 +1,19 @@
+var productListTest = function() {
+    this.World = require("../support/world.js").World;
+    this.controller = null;
+
+    this.Given(/^sort by drop\-down value is (\w+)$/, function (orderBy, next) {
+        this.controller = 
+        next();
+    });
+
+    this.When(/^I type (\w+) in search text box$/, function (key, next) {
+        next();
+    });
+
+    this.Then(/^the first product is (\w+) S$/, function (result, next) {
+        next();
+    });
+}
+
+module.exports = productListTest;

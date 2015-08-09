@@ -1,0 +1,6 @@
+var product = function(input) {
+    var reg = /(\+|\-)?[0-9]+(\.[0-9]*)?/;
+    return reg.test(self.input); 
+}
+
+module.exports = product;

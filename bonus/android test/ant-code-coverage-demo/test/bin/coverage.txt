@@ -1,0 +1,20 @@
+[EMMA v2.0.5312 report, generated Thu Jul 23 16:37:40 CST 2015]
+-------------------------------------------------------------------------------
+OVERALL COVERAGE SUMMARY:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+92%  (12/13)!	81%  (29/36)	75%  (764/1023)!	73%  (136/186)!	all classes
+
+OVERALL STATS SUMMARY:
+
+total packages:	1
+total classes:	13
+total methods:	36
+total executable files:	5
+total executable lines:	186
+
+COVERAGE BREAKDOWN BY PACKAGE:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+92%  (12/13)!	81%  (29/36)	75%  (764/1023)!	73%  (136/186)!	cn.hzbook.android.test.chapter1
+-------------------------------------------------------------------------------

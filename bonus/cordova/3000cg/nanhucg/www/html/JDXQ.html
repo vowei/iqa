@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>监督记录详情</title>
+<script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile-1.3.2.css">
+<script type="text/javascript" charset="utf-8" src="../js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../js/BaiduLoc.js"></script>
+<script type="text/javascript" src="../js/jquery.mobile-1.3.2.min.js"></script>
+</head>
+<body>
+	<div data-role="page" id="page">
+	 	<div data-role="header" data-position="fixed" data-theme="a">
+	 	    <input type="button" name="Submit" data-icon="arrow-l" value="返回" class="ui-btn-left" onclick="javascript:history.back(1)" /> 
+	 		<h1>监督记录详情</h1>
+	 		<!-- 这个按钮是跳转至地图的按钮-->
+	 		<input type="button" class="ui-btn-right" value="查看地图" onclick="lockmop();"/>
+	 	</div>
+	 	<div data-role="content">
+	 	 <ul data-role="listview" id="list">
+	 	 </ul>
+        </div>
+     </div>
+</body>
+<script type="text/javascript">
+
+var token;
+var sid;
+
+//这是地址的经纬度值
+var geolocation;
+var Geotion;
+var latitude;
+var longitude;
+var pointx;
+var pointy;
+ var __transformdata = {
+    'Lat':{Intercept:30.7446663517242,Variable1:3.04106813089461E-06,Variable2:-4.58897325647206E-06},
+	'Lng':{Intercept:120.628534835207,Variable1:3.52211176802445E-06,Variable2:5.17437653261439E-06},
+    'X':{Intercept:-22340310.3619706,Variable1:162202.239446448,Variable2:143858.642201672},
+    'Y':{Intercept:-8105520.80234304,Variable1:-110415.565159486,Variable2:95335.738985404}
+    };
+       // 等待PhoneGap连接设备
+	document.addEventListener("deviceready",onDeviceReady,false);
+	// PhoneGap准备就绪，可以使用！
+	function onDeviceReady(){
+	    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+	    dingwei();
+        document.addEventListener("pause", dingwei, false);
+	    document.addEventListener("backbutton", eventBackButton, false); //返回键		
+	}
+	function geoo(){
+	     $.ajax({
+           url:"http://webapi.vikvon.com:80/Unified/UploadSelfGeography?geo="+latitude+"%2C"+longitude+"&EDUx="+pointx+"&EDUy="+pointy,
+           type:"post",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",       
+           success: function (response){console.log(response.data);},
+           error: function (response) {console.log(response.responseText);}
+           }); 	   
+	}
+            
+    function dingwei() {
+       window.plugins.PGBdLocation.getlocation(function(data){
+            var loc = JSON.parse(data);
+            latitude=loc.Latitude;
+            longitude=loc.Longitude;
+            var point = ELatLng2EPoint({Lat:latitude,Lng:longitude});
+            pointx=point.X;
+            pointy=point.Y;
+            geoo();     
+        }, function (error) {
+            alert(error);
+        });
+       function ELatLng2EPoint(elatlng) {
+            //<summary>2维地图坐标转化成2.5坐标</summary>
+            return { X: parseInt(__transformdata.X.Variable1 * elatlng.Lat+ __transformdata.X.Variable2 * elatlng.Lng  + (__transformdata.X.Intercept)), Y: parseInt(__transformdata.Y.Variable1 * elatlng.Lat + __transformdata.Y.Variable2 * elatlng.Lng  + (__transformdata.Y.Intercept)) };
+       }
+       var timename=setInterval("dingwei();",300000);
+     }    	
+	
+ // 获取nanhuAPPFile目录   
+function gotFS(fileSystem) {
+     newFile = fileSystem.root.getDirectory("nanhuAPPFile",null,readerFile,fail);        
+       }    
+//获取nanhuAPPFile目录下面的nanhuAPPtoken.txt文件
+function readerFile(newFile) {
+     newFile.getFile("nanhuAPPtoken.txt",null,gotFileEntry,fail);    
+       }    
+function gotFileEntry(fileEntry) {
+     fileEntry.file(gotFile,fail);    
+       }   
+function gotFile(file){ 
+     readAsText(file);   
+       }    
+function readAsText(file) {
+     var reader = new FileReader();   
+     reader.onloadend = function(txt) {  
+        token=txt.target.result;
+         tt();
+                };   
+           reader.readAsText(file);
+            }     
+function fail(txt) { 
+       console.log(txt.target.error.code);   
+            } 
+function tt(){
+    var s=location.href;
+    sid=s.split("\=")[1];
+    $.ajax({
+         url:"http://webapi.vikvon.com:80/MonitorAcceptance/GetMARecordInformation/"+sid,
+         type:"get",
+         beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+         async:false,
+         dataType: "json",
+         success: function (response){
+                         if(response.message==null){
+                               geolocation=response.data.geoLocation;
+                           var title=response.data.shortTitle;
+                           var miao=response.data.description;
+                            Geotion=response.data.freidlyLocation;
+                           var time=response.data.reportTime;
+                           var name=response.data.reportor.nickName;
+                           var ppp=response.data.extField7;
+                           var con='';
+                           con=con+"<li><h4>标题：</h4>&nbsp;&nbsp;&nbsp;&nbsp;<h1>"+title+"</h1></li>";
+                           con=con+"<li><h4>详细描述：</h4>&nbsp;&nbsp;&nbsp;&nbsp;<h2>"+miao+"</h2></li>";
+                           con=con+"<li><h4>详细地址：</h4>&nbsp;&nbsp;&nbsp;&nbsp;<h2>"+Geotion+"</h2></li>";
+                           con=con+"<li><h4>上报时间：</h4>&nbsp;&nbsp;&nbsp;&nbsp;<p>"+time+"</p></li>";
+                           con=con+"<li><h4>上报人：</h4>&nbsp;&nbsp;&nbsp;&nbsp;<p>"+name+"</p></li>";
+                           con=con+"<img src='http://webapi.vikvon.com/"+ppp+"' style='width:100%;height:360px;'/>"
+                            $("#list").empty().append(con).listview('refresh');
+                             }
+                            else
+                             { alert("获取详情失败"+response.message); }
+                          	         },
+           error: function (response) {console.log(response.responseText);}
+           });
+}
+function eventBackButton(){
+          history.go(-1);
+} 	
+//这里写按钮的点击事件	
+     function lockmop(){
+        window.location.href="baiduMap.html?id="+encodeURI(geolocation)+"&geotion="+encodeURI(Geotion);
+     }
+</script>
+</html>

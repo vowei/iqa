@@ -1,0 +1,11 @@
+var Person = function() {};
+
+Person.prototype.helloSomeone = function(toGreet) {
+    return "Hello" + " " + toGreet;
+};
+
+/*
+Person.prototype.sayHello = function() {
+    return "Hello";
+}
+/*

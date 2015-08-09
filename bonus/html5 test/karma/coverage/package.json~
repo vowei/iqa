@@ -1,0 +1,27 @@
+{
+  "name": "esri-karma-tutorial",
+  "version": "0.2.1",
+  "description": "A demonstration of how to use the Karma test runner to automatically run Jasmine BDD-style unit tests on your ArcGIS API for JavaScript code.",
+  "main": "spec/main.js",
+  "keywords": [
+    "unit testing",
+    "ArcGIS",
+    "JavaScript",
+    "Karma",
+    "Jasmine",
+    "Dojo"
+  ],
+  "author": "Tom Wayson <tom@tomwayson.com> (http://tomwayson.com)",
+  "license": "Apache",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomwayson/esri-karma-tutorial.git"
+  },
+  "devDependencies": {
+    "karma": "^0.12.19",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-dojo": "0.0.1",
+    "karma-jasmine": "^0.1.5"
+  },
+  "readmeFilename": "README.md"
+}

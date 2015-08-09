@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>设置</title>
+<script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile-1.3.2.css">
+<script type="text/javascript" charset="utf-8" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/Toast-Plugin.js"></script>
+</head>
+<body>
+	<div data-role="page" id="page">
+	 	<div data-role="header" data-position="fixed" data-theme="a">
+	 	    <input type="button" name="Submit" data-icon="arrow-l" value="返回" class="ui-btn-left" onclick="javascript:history.back(1)" /> 
+	 		<h1>系统设置</h1>
+	 		<input type="button" data-icon="gear" data-iconpos="left" class="ui-btn-right" value="保存" onclick="save();"/>
+	 	</div>
+	 	
+	 	<div data-role="content">
+	 <form action="" method="post">
+         <label for="update">WiFi下自动更新地图包</label>
+		    <select name="update" id="update" data-role="slider" data-mini="true" onchange="changeupdate()">
+		      <option value="0">关</option>
+		      <option value="1">开</option>
+	        </select>
+	     <label for="disturb">勿扰模式</label>
+		    <select name="disturb" id="disturb" data-role="slider" data-mini="true" onchange="changedisturb()">
+		      <option value="0">关</option>
+		      <option value="1">开</option>
+	        </select>
+	     <label for="jitter">振动</label>
+		    <select name="jitter" id="jitter" data-role="slider" data-mini="true" onchange="changejitter()">
+		      <option value="0">关</option>
+		      <option value="1">开</option>
+	        </select>
+	      <label for="voice">声音</label>
+		    <select name="voice" id="voice" data-role="slider" data-mini="true" onchange="changevoice()">
+		      <option value="0">关</option>
+		      <option  value="1">开</option>
+	        </select>
+	     </form>
+        </div>
+     </div>
+</body>
+<script type="text/javascript">
+var token;
+var val1=document.getElementById("update").value;
+var val2=document.getElementById("disturb").value;
+var val3=document.getElementById("jitter").value;
+var val4=document.getElementById("voice").value;
+ function changeupdate(){
+     val1=document.getElementById("update").value;
+ }
+ function changedisturb(){
+	 val2=document.getElementById("disturb").value;
+}
+function changejitter(){
+	 val3=document.getElementById("jitter").value;
+}
+function changevoice(){
+	 val4=document.getElementById("voice").value;
+}
+ // 等待PhoneGap连接设备
+	document.addEventListener("deviceready",onDeviceReady,false);
+function onDeviceReady(){
+	    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);			
+	}
+ function jiaset_up(){
+     $.ajax({
+            type:"get",
+            url:"http://webapi.vikvon.com:80/Unified/GetSettings",
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", "Bearer "+token);
+            },
+            async:false,
+            dataType: "json",
+            success:function(response){
+                            console.log(response.message);
+                            if(response.message!=null){alert(response.massage);}
+                            else{
+                             var da=response.data;
+                             var vibration=da.vibration;
+                             var sound=da.sound;
+                             var disturbFree=da.disturbFree;
+                             var autoUpdate=da.autoUpdate;
+                             $("[name=update] [value="+autoUpdate+"]").attr("selected","selected").trigger("change");
+                             $("[name=disturb] [value="+disturbFree+"]").attr("selected","selected").trigger("change");
+                             $("[name=jitter] [value="+vibration+"]").attr("selected","selected").trigger("change");                             
+                             $("[name=voice] [value="+sound+"]").attr("selected","selected").trigger("change");
+                                }
+                                      },
+             error: function (response) {console.log(response.responseText);}
+           });
+ }
+     //获取nanhuAPPFile目录   
+function gotFS(fileSystem) {
+     newFile = fileSystem.root.getDirectory("nanhuAPPFile",null,readerFile,fail);         
+       }    
+//获取nanhuAPPFile目录下面的nanhuAPPtoken.txt文件
+function readerFile(newFile) {
+     newFile.getFile("nanhuAPPtoken.txt",null,gotFileEntry, fail);
+       }    
+function gotFileEntry(fileEntry) {
+     fileEntry.file(gotFile, fail);    
+       }   
+function gotFile(file){ 
+     readAsText(file);   
+       }    
+function readAsText(file) {
+     var reader = new FileReader();   
+     reader.onloadend = function(txt) {  
+           console.log(txt.target.result);
+           token=txt.target.result;
+           jiaset_up();
+                };   
+           reader.readAsText(file);
+            }     
+function fail(txt) { 
+       console.log(txt.target.error.code);   
+            }  
+
+function save(){
+       var da = "{AutoUpdate:'"+val1+"',DisturbFree:'"+val2+"',Vibration:'"+val3+"',Sound:'"+val4+"'}";
+       $.ajax({
+           type:"post",
+           url:"http://webapi.vikvon.com:80/Unified/Settings",
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", "Bearer "+token);
+            },
+           async:false,
+           data: da,
+           contentType: "application/json; charset=utf-8",
+           success: function (response)  {
+                    console.log(response);
+                    if(response.message!=null){
+                       window.plugins.toast.shortshow(response.message);
+                    }
+                    else{
+                    window.plugins.toast.shortshow( "设置保存成功" );
+                    }
+                },
+              error: function (response) {
+                    console.log(response.responseText);
+            },
+             dataType: "json", 
+       });  	
+	} 
+ 
+</script>
+</html>
