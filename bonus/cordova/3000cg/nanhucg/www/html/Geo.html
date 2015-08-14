@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+  <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+  <meta HTTP-EQUIV="expires" CONTENT="0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+ 
+  <style type="text/css">
+    body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+    #allmap{width:100%;height:100%;position:absolute;z-index:1;}
+    p{margin-left:5px; font-size:14px;}
+    #context{position:absolute;z-index:2;margin:0 auto;}
+	</style>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6I4apTg7ZPYGGq3xnWi2EKoL"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+  <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+  <title>定位地图</title>
+</head>
+<body  onload="jiazai();">
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+
+	function GetQueryString(id) {
+    var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)","i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r!=null) return (r[2]); return null;
+	}
+	var temp = GetQueryString("id");
+	var ti= GetQueryString("ti");
+	var description= GetQueryString("description");
+	var Geo;
+	var lati="30.743072";
+	var longi="120.781294";
+	function jiazai(){
+		navigator.geolocation.getCurrentPosition(onPositionSuccess, PositionError);
+    }
+ function onPositionSuccess(position){
+	    lati=position.coords.latitude;
+	    longi=position.coords.longitude;
+	}
+	function PositionError(){
+		alert('position error');
+	}
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");
+  map.centerAndZoom(new BMap.Point(lati,longi), 18);
+ 
+  function ZoomControl(){
+	  // 默认停靠位置和偏移量
+	  this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
+	  this.defaultOffset = new BMap.Size(10, 10);
+	}
+  ZoomControl.prototype = new BMap.Control();
+  ZoomControl.prototype.initialize = function(map){
+	  // 创建一个DOM元素
+	  var div = document.createElement("div");
+	  // 添加文字说明
+	  div.appendChild(document.createTextNode("返回"));
+	  // 设置样式
+	  div.style.cursor = "pointer";
+	  div.style.border = "1px solid gray";
+	  div.style.backgroundColor = "white";
+	  // 绑定事件
+	  div.onclick = function(e){
+		//map.setZoom(map.getZoom() + 2);
+		if(temp=="newadd"){
+			window.location.href = "newAdd.html?ti="+ti+"&description="+description;
+		}else{
+			window.location.href = "Newsuper.html?ti="+ti+"&description="+description;
+			}
+	  }
+	  // 添加DOM元素到地图中
+	  map.getContainer().appendChild(div);
+	  // 将DOM元素返回
+	  return div;
+	}
+	// 创建控件
+	var myZoomCtrl = new ZoomControl();
+	// 添加到地图当中
+	map.addControl(myZoomCtrl);
+
+  // 添加带有定位的导航控件
+  var navigationControl = new BMap.NavigationControl({
+    // 靠左上角位置
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    // LARGE类型
+    type: BMAP_NAVIGATION_CONTROL_LARGE,
+    // 启用显示定位
+    enableGeolocation: true
+  });
+  map.addControl(navigationControl);
+  map.addOv
+  // 添加定位控件
+  var geolocationControl = new BMap.GeolocationControl();
+  geolocationControl.addEventListener("locationSuccess", function(e){
+    // 定位成功事件
+    var address = '';
+    address =address+e.addressComponent.province;
+    address =address+e.addressComponent.city;
+    address =address+e.addressComponent.district;
+    address =address+e.addressComponent.street;
+    address =address+e.addressComponent.streetNumber;
+    alert("当前定位地址：" + address);
+  });
+  geolocationControl.addEventListener("locationError",function(e){
+    // 定位失败事件
+    alert(e.message);
+  });
+
+var locaName;
+  map.addControl(geolocationControl);
+	
+	 var geoc = new BMap.Geocoder();    
+		map.addEventListener("click", function(e){        
+		var pt = e.point;
+		geoc.getLocation(pt, function(rs){
+			var addComp = rs.addressComponents;		
+			locaName= encodeURI(addComp.province+addComp.city+addComp.district+addComp.street+addComp.streetNumber);
+			msgbox('选择地址',decodeURI(locaName),'1','','true','');
+		});        
+	});
+	function msgbox(title,content,func,cancel,focus,icon){
+		/*		
+		参数列表说明:
+		title :弹出对话框的标题,标题内容最好在25个字符内,否则会导致显示图片的异常															
+		text  :弹出对话框的内容,可以使用HTML代码,例如<font color='red'>删除么?</font>,如果直接带入函数,注意转义
+		func  :弹出对话框点击确认后执行的函数,需要写全函数的引用,例如add(),如果直接带入函数,注意转义。
+		cancel:弹出对话框是否显示取消按钮,为空的话不显示,为1时显示
+		focus :弹出对话框焦点的位置,0焦点在确认按钮上,1在取消按钮上,为空时默认在确认按钮上
+		icon  :弹出对话框的图标
+		Author:Jedliu
+		Blog  :Jedliu.cublog.cn 
+		【网页转载请保留版权信息,实际使用时可以除去该信息】
+		*/	
+		//icon="msgbox_"+icon+".png";
+		create_mask();
+		var temp="<div id=\"context\" style=\"width:300px;margin-left:30px;margin-top:200px;border: 2px solid #37B6D1;background-color: #fff; font-weight: bold;font-size: 12px;\" >"
+				+"<div style=\"line-height:25px; padding:0px 5px;	background-color: #37B6D1;\">"+title+"</div>"
+				+"<table  cellspacing=\"0\" border=\"0\"><tr><td style=\" padding:0px 0px 0px 20px; \">"
+				+"<td ><div style=\"background-color: #fff; font-weight: bold;font-size: 12px;padding:20px 0px ; text-align:left;\">"+content
+				+"</div></td></tr></table>"
+				+"<div style=\"text-align:center; padding:0px 0px 20px;background-color: #fff;\"><input type='button'  style=\"border:1px solid #CCC; background-color:#CCC; width:50px; height:25px;\" value='确定'id=\"msgconfirmb\"  onClick='affirm()'>";
+		temp+="&nbsp;&nbsp;&nbsp;<input type='button' style=\"border:1px solid #CCC; background-color:#CCC; width:50px; height:25px;\" value='取消'  id=\"msgcancelb\"   onClick='cancelFun()'>";
+		temp+="</div></div>";
+		create_msgbox(400,200,temp);
+		if(focus==0||focus=="0"||null==focus){document.getElementById("msgconfirmb").focus();}
+		else if(focus==1||focus=="1"){document.getElementById("msgcancelb").focus();}			
+	}
+	function get_width(){
+		return (document.body.clientWidth+document.body.scrollLeft);
+	}
+	function get_height(){
+		return (document.body.clientHeight+document.body.scrollTop);
+	}
+	function get_left(w){
+		var bw=document.body.clientWidth;
+		var bh=document.body.clientHeight;
+		w=parseFloat(w);
+		return (bw/2-w/2+document.body.scrollLeft);
+	}
+	function get_top(h){
+		var bw=document.body.clientWidth;
+		var bh=document.body.clientHeight;
+		h=parseFloat(h);
+		return (bh/2-h/2+document.body.scrollTop);
+	}
+	function create_mask(){//创建遮罩层的函数
+		var mask=document.createElement("div");
+		mask.id="mask";
+		mask.style.position="absolute";
+		mask.style.filter="progid:DXImageTransform.Microsoft.Alpha(style=4,opacity=25)";//IE的不透明设置
+		mask.style.opacity=0.4;//Mozilla的不透明设置
+		mask.style.background="black";
+		mask.style.top="0px";
+		mask.style.left="0px";
+		mask.style.width=get_width();
+		mask.style.height=get_height();
+		mask.style.zIndex=1000;
+		document.body.appendChild(mask);
+	}
+	function create_msgbox(w,h,t){//创建弹出对话框的函数
+		var box=document.createElement("div")	;
+		box.id="msgbox";
+		box.style.position="absolute";
+		box.style.width=w;
+		box.style.height=h;
+		box.style.overflow="visible";
+		box.innerHTML=t;
+		box.style.zIndex=1001;
+		document.body.appendChild(box);
+		re_pos();
+	}
+	function re_mask(){
+		/*
+		更改遮罩层的大小,确保在滚动以及窗口大小改变时还可以覆盖所有的内容
+		*/
+		var mask=document.getElementById("mask")	;
+		if(null==mask)return;
+		mask.style.width=get_width()+"px";
+		mask.style.height=get_height()+"px";
+	}
+	function re_pos(){
+		/*
+		更改弹出对话框层的位置,确保在滚动以及窗口大小改变时一直保持在网页的最中间
+		*/
+		var box=document.getElementById("msgbox");
+		if(null!=box){
+			var w=box.style.width;
+			var h=box.style.height;
+			box.style.left=get_left(w)+"px";
+			box.style.top=get_top(h)+"px";
+		}
+	}
+	function remove(){
+		/*
+		清除遮罩层以及弹出的对话框
+		*/
+		var mask=document.getElementById("mask");
+		var msgbox=document.getElementById("msgbox");
+		if(null==mask&&null==msgbox)return;
+		document.body.removeChild(mask);
+		document.body.removeChild(msgbox);
+	}
+	
+	function re_show(){
+		/*
+		重新显示遮罩层以及弹出窗口元素
+		*/
+		re_pos();
+		re_mask();	
+	}
+	function load_func(){
+		/*
+		加载函数,覆盖window的onresize和onscroll函数
+		*/
+		window.onresize=re_show;
+		window.onscroll=re_show;	
+	}
+	function affirm(){
+		remove();
+		if(temp=="newadd"){
+			window.location.href = "newAdd.html?ti="+ti+"&description="+description+"&id="+locaName;
+		}else{
+			window.location.href = "Newsuper.html?ti="+ti+"&description="+description+"&id="+locaName;
+		}	
+	}
+	function cancelFun(){
+		remove();
+	}
+</script>

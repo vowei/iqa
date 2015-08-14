@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>现场添加</title>
+<script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile-1.3.2.css">
+<script type="text/javascript" charset="utf-8" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/BaiduLoc.js"></script>
+<script type="text/javascript" src="../js/Toast-Plugin.js"></script>
+</head>
+<body>
+	<div data-role="page" id="page">
+		<div data-role="header" data-position="fixed" data-theme="a">
+		<input type="button" name="back" data-icon="arrow-l" value="取消" onclick="javascript:location.href='../html/supervision.html'" /> 
+			<h1>上报监督受理记录</h1>
+			<input type="button" name="save" id="save" data-icon="check" value="上报"  class="ui-btn-right" onclick="save();">
+		</div>
+		
+       <div data-role="content">
+          <form>
+             <fieldset>
+               <ul data-role="listview" data-inset="true">
+               <li data-role="fieldcontain">
+               <label for="ti">标题（必填）：</label>
+               <input name="ti" id="ti" value="" type="text">
+               </li>
+               </ul>
+               <ul data-role="listview" data-inset="true">
+               <li data-role="fieldcontain">
+               <label for="description">描述（必填）：</label>
+               <textarea name="description" id="description" value="" rows="6" cols="20"></textarea> 
+               </li>
+               </ul>               
+                <ul data-role="listview" data-inset="true">
+               <li data-role="fieldcontain">
+               <label for="geolcation">地理位置（必填）：</label>
+              <span><input name="geolcation" id="geolcation" value="" type="text">
+              <br><input type="button" id="ditu" value="查看地图"></span>
+               </li>
+               </ul>
+               <ul data-role="listview" data-inset="true">
+                   <li data-role="fieldcontain">
+                   <label for="description">大类部件（必选）：</label>
+                   <select name="big" id="big"  onchange='changemall();'>
+                   <option selected="selected">--请选择--</option>
+                   </select>
+                   </li>
+               </ul>
+               
+               <ul data-role="listview" data-inset="true">
+                   <li data-role="fieldcontain">
+                   <label for="description">小类部件（必选）：</label>
+                   <select name="mall" id="mall">
+                   <option selected="selected">--请选择--</option>
+                   </select>
+                   </li>
+               </ul>
+             </fieldset>
+           </form> 
+            <input type="button" id="PhotoUpload" value="点击拍照"  onclick="capturePhoto();">
+	        <img style="display:none;width:100%;height:240px;" id="smallImage" src="" />                 
+	    </div>
+	</div>
+	
+</body>
+<script type="text/javascript">
+	function GetQueryStringQ(id) {
+		var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)","i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r!=null) return (r[2]); return null;
+	}
+	
+	var locaId = GetQueryStringQ("id");
+	var title= GetQueryStringQ("ti");
+	var content = GetQueryStringQ("description");
+	var titleTi=decodeURI(title);
+	var contentDescription= decodeURI(content);
+	if(locaId !== null || locaId !== undefined || locaId !== ''){
+		window.onload = function() { 
+			var locaaddress= decodeURI(locaId);
+			
+			if(locaId !== null ){
+				document.getElementById('geolcation').value = locaaddress; 
+			}
+			if("null" !== titleTi && titleTi !== undefined){
+				document.getElementById('ti').value = titleTi; 
+			}
+			if("null" !== contentDescription && contentDescription !==undefined){
+				document.getElementById('description').value = contentDescription;
+			}
+		}
+	}; 
+    var pictureSource;		//图片来源
+	var destinationType;		//设置返回值的格式
+	var token;
+	var latitude="120.782294";//经度
+	var longitude="30.743072";//纬度
+	var photor; 
+	var ul;
+	var pointx;
+    var pointy;
+     var __transformdata = {
+    'Lat':{Intercept:30.7446663517242,Variable1:3.04106813089461E-06,Variable2:-4.58897325647206E-06},
+	'Lng':{Intercept:120.628534835207,Variable1:3.52211176802445E-06,Variable2:5.17437653261439E-06},
+    'X':{Intercept:-22340310.3619706,Variable1:162202.239446448,Variable2:143858.642201672},
+    'Y':{Intercept:-8105520.80234304,Variable1:-110415.565159486,Variable2:95335.738985404}
+    };
+	// 等待PhoneGap连接设备
+	document.addEventListener("deviceready",onDeviceReady,false);
+	
+	// PhoneGap准备就绪，可以使用！
+	function onDeviceReady(){
+	    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+	    pictureSource=navigator.camera.PictureSourceType;
+		destinationType=navigator.camera.DestinationType;
+        dingwei();	
+	    document.addEventListener("backbutton",backbutton,false);	
+	}
+    function dingwei() {
+       window.plugins.PGBdLocation.getlocation(function(data){
+            var loc = JSON.parse(data);
+            latitude=loc.Latitude;
+            longitude=loc.Longitude;
+            var point = ELatLng2EPoint({Lat:latitude,Lng:longitude});
+            pointx=point.X;
+            pointy=point.Y;
+            console.log("latitude:"+latitude+",longitude:"+longitude+"   ,X坐标："+pointx+"Y坐标："+pointy);
+            alert("latitude:"+latitude+",longitude:"+longitude+"   ,X坐标："+pointx+"Y坐标："+pointy);
+   }, function (error) {
+       alert(error);
+   });
+   function ELatLng2EPoint(elatlng) {
+        ///<summary>2维地图坐标转化成2.5坐标</summary>
+      
+        return { X: parseInt(__transformdata.X.Variable1 * elatlng.Lat+ __transformdata.X.Variable2 * elatlng.Lng  + (__transformdata.X.Intercept)), Y: parseInt(__transformdata.Y.Variable1 * elatlng.Lat + __transformdata.Y.Variable2 * elatlng.Lng  + (__transformdata.Y.Intercept)) };
+        }
+   }
+	$("#ditu").click(function(){
+			//navigator.geolocation.getCurrentPosition(onPositionSuccess,PositionError);
+			var ti= document.getElementById("ti").value;
+			var description=document.getElementById("description").value;
+			location.href="Geo.html?id=newsuper&ti="+ti+"&description="+description;			
+		});
+	
+   function onPhotoDataSuccess(imageData) {
+		var smallImage = document.getElementById('smallImage');
+		smallImage.style.display = 'block';
+		smallImage.src = imageData;
+	}
+	function capturePhoto() {
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+			quality : 50,
+			destinationType : navigator.camera.DestinationType.FILE_URI,
+			sourceType : Camera.PictureSourceType.CAMERA,
+			allowEdit : true,
+			encodingType : Camera.EncodingType.JPEG,
+			popoverOptions : CameraPopoverOptions,
+			saveToPhotoAlbum : true
+		});
+	}
+	function onFail(message) {
+		alert('Failed because: ' + message);
+	}
+	function uploadPhoto(imageURI) {
+		var options = new FileUploadOptions();
+		//用于设置参数，对应form表单里控件的name属性，这是关键，这里的参数名字，和表单提交的form对应
+		options.fileKey = "fileAddPic";
+		options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+		//如果是图片格式，就用image/jpeg，其他文件格式上官网查API
+		options.mimeType = "image/jpeg";
+		//这里的uri根据自己的需求设定，是一个接收上传图片的地址
+		var uri = encodeURI("http://webapi.vikvon.com:80/Unified/UploadRecordPicture");
+		photor=imageURI;
+		var ft = new FileTransfer();
+		ft.upload(imageURI, uri, win, fil, options);
+	}
+	function win(r) {
+		var response = r.response;
+		//这里的message是自定义的返回值，具体的根据自己的需求而定
+		var mes = eval("(" + r.response + ")").message;
+		if(mes==null){
+		      ul = eval("(" + r.response + ")").data;
+		     onPhotoDataSuccess(photor);
+		}else{
+		    alert(mes);
+		}
+        
+	}
+	function fil(error) {
+		alert("An error has occurred: Code = " + error.code);
+		alert("upload error source " + error.source);
+		alert("upload error target " + error.target);
+	}
+	function save(){
+	   var mallid=document.getElementById("mall").value;
+	   var ti=document.getElementById("ti").value;
+       var description=document.getElementById("description").value;
+       var jingwei=latitude+","+longitude;
+       var freidlyLocation=document.getElementById("geolcation").value;
+       if(ti.length==0|description.length==0|freidlyLocation.length==0){
+              window.plugins.toast.shortshow( "请完善信息！" );
+       }else{
+           if(latitude==null|longitude==null){
+            window.plugins.toast.shortshow( "请打开手机定位器GPS！" );
+           }else{
+           var da = "{ShortTitle:'"+ti+"',GeoLocation:'"+jingwei+"',Description:'"+description+"',FreidlyLocation:'"+freidlyLocation+"',extField7:'"+ul+"',extField5:'"+mallid+"',EDUx:'"+pointx+"',EDUy:'"+pointy+"'}";
+       $.ajax({
+           type:"post",
+           url:"http://webapi.vikvon.com:80/MonitorAcceptance/SaveMonitorAcceptanceRecord",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           data: da,
+           dataType: "json",
+           contentType: "application/json; charset=utf-8",
+           success: function (response)  {
+                    console.log(response);
+                    if(response.message!=null){
+                    window.plugins.toast.shortshow( "监督记录上报失败！" );
+                    }
+                    else{
+                    window.plugins.toast.shortshow("监督记录上报成功！");
+                       location.href="supervision.html";
+                    }
+                },
+              error: function (response) {
+                    console.log(response.responseText);
+            },
+             dataType: "json", 
+       });	
+	}}
+	}
+	
+	
+	//获取nanhuAPPFile目录   
+function gotFS(fileSystem) {
+     newFile = fileSystem.root.getDirectory("nanhuAPPFile",null,readerFile,fail);         
+       }    
+//获取nanhuAPPFile目录下面的nanhuAPPtoken.txt文件
+function readerFile(newFile) {
+     newFile.getFile("nanhuAPPtoken.txt",null,gotFileEntry, fail);    
+       }    
+function gotFileEntry(fileEntry) {
+     fileEntry.file(gotFile, fail);    
+       }   
+function gotFile(file){ 
+     readAsText(file);   
+       }    
+function readAsText(file) {
+     var reader = new FileReader();   
+     reader.onloadend = function(txt) {  
+        token=txt.target.result;
+        arts();
+                };   
+           reader.readAsText(file);
+            }     
+function fail(txt) { 
+       console.log(txt.target.error.code);   
+            }  
+ 
+ //这里是获取大类部件
+ function arts(){
+       $.ajax({
+           type:"get",
+           url:"http://webapi.vikvon.com:80/Property/GetAllProperties",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",
+           contentType: "application/json; charset=utf-8",
+           success: function (response)  {
+                    if(response.message==null){
+                          var con="<option selected='selected' value='请选择'>--请选择--</option>";
+                          var data = response.data;
+                          for (var l in data){
+                          	var name = eval("data["+l+"].name");
+                          	var id=eval("data["+l+"].id");
+                          	var description=eval("data["+l+"].description");
+                          	con=con+"<option value='"+id+"'>";
+                          	con=con+name+"</option>";
+                          	                 }
+                           $("#big").empty().append(con).listview('refresh');
+                    }else{
+                       alert("没有保存的大类部件");
+                    }
+                    
+                },
+              error: function (response) {
+                    console.log(response.responseText);
+            },
+             dataType: "json", 
+       });	
+ }
+//这里是当大类部件选择后获取对应小类部件  
+function changemall(){
+     var bigid=document.getElementById("big").value;
+     $.ajax({
+           type:"get",
+           url:"http://webapi.vikvon.com:80/Property/getSubProperies?parentId="+bigid,
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",
+           contentType: "application/json; charset=utf-8",
+           success: function (response)  {
+                    if(response.message==null){
+                          var data = response.data;
+                          for (var l in data){};
+                          if(l<1){
+                                var con="<option selected='selected' value='请选择'>--请选择--</option>";
+                             for (var l in data){
+                          	var name = eval("data["+l+"].name");
+                          	var id=eval("data["+l+"].id");
+                          	var description=eval("data["+l+"].description");
+                          	con=con+"<option value='"+id+"'>";
+                          	con=con+name+"</option>";
+                          	                 }
+                           $("#mall").empty().append(con).listview('refresh');
+                          }else{
+                                var con="<option selected='selected' value='请选择'>--请选择--</option>";
+                             for (var l=1; l in data; l++){
+                          	var name = eval("data["+l+"].name");
+                          	var id=eval("data["+l+"].id");
+                          	var description=eval("data["+l+"].description");
+                          	con=con+"<option value='"+id+"'>";
+                          	con=con+name+"</option>";
+                          	                 }
+                           $("#mall").empty().append(con).listview('refresh');
+                          }
+                          
+                           
+                    }else{
+                       alert("获取小类部件失败");
+                    }
+                    
+                },
+              error: function (response) {
+                    console.log(response.responseText);
+            },
+             dataType: "json",   
+     });
+} 
+function backbutton(){
+          history.go(-1);
+}  
+</script>
+</html>

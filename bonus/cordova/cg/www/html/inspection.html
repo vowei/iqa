@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>城市巡检</title>
+<script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.3.2.css">
+<script type="text/javascript" charset="utf-8" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/Toast-Plugin.js"></script>
+</head>
+<style>
+ body *{
+ 	-webkit-user-select:none;	
+  }
+</style>
+<body>
+	<div data-role="page" id="page">
+	 	<div data-role="header" data-position="fixed" data-theme="a">
+	 	    <input type="button" name="Submit" data-icon="arrow-l" value="返回" onclick="javascript:location.href='../html/home_page.html'"/> 
+	 		<h1>城市巡检</h1>
+	 		<input type="button" data-icon="plus" data-iconpos="left" class="ui-btn-right" value="现场添加" onclick="javascript:location.href='newAdd.html';"/>
+	 		<div data-role="navbar">
+              <ul>
+               <li><input type="button" id="Has_been" name="Has_been" value="已上报" /> </li>
+               <li><input type="button" id="be_reported" name="be_reported" value="待上报" /></li>
+               <li><input type="button" id="be_processed" name="be_processed" value="待处理" /></li>
+              </ul>
+            </div>
+	 	</div>
+	 	 <div data-role="content">
+		 <ul data-role="listview" id="list"> 
+         </ul>
+         </div>
+        <div data-role="footer" data-position="fixed" data-theme="a" style="display:none;">
+        <input type="button"  class="caa" value="关注" ide="Focus">
+        </div>      
+     </div> 		
+</body>
+<script type="text/javascript">                    
+var token;
+ var aba; 
+ var aaa;               	 
+	// 等待PhoneGap连接设备
+ 	document.addEventListener("deviceready",onDeviceReady,false);
+function onDeviceReady(){
+     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,gotFS, fail);
+	                    }	
+function ajaxjiazai(){
+ 	     $.ajax({
+           url:"http://webapi.vikvon.com:80/Device/GetDevicePatrolList?type=1",
+           type:"get",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",       
+           success: function (response){
+                          var con='';
+                          var data = response.data;
+                          for (var l in data){
+                          	var ti = eval("data["+l+"].shortTitle");
+                          	var idd=eval("data["+l+"].id");
+                          	var time=eval("data["+l+"].reportTime");
+                          	con=con+"<li class='tocuh' id='"+idd+"'>";
+                          	con=con+"<a data-role='button'>";
+                          	con=con+ti;
+                          	con=con+"</a>";
+                          	con=con+"<p>";
+                          	con=con+"记录时间："+time;
+                          	con=con+"</p>";
+                          	con=con+"</li>";
+                          	                 }
+                           
+                           $("#list").empty().append(con).listview('refresh');
+                                       },
+           error: function (response) {console.log(response.responseText);}
+           });
+             $(document).ready(function(){tiao();thoo(); });  
+ }
+ 
+//点击已上报请求数据并显示
+$("#Has_been").click(function(){
+ 	$.ajax({
+           url:"http://webapi.vikvon.com:80/Device/GetDevicePatrolList?type=1",
+           type:"get",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",       
+           success: function (response){
+                          var con='';
+                          var data = response.data;
+                          for (var l in data){
+                          	var ti = eval("data["+l+"].shortTitle");
+                          	var idd=eval("data["+l+"].id");
+                          	var time=eval("data["+l+"].reportTime");
+                          	con=con+"<li class='tocuh' id='"+idd+"'>";
+                          	con=con+"<a data-role='button'>";
+                          	con=con+ti;
+                          	con=con+"</a>";
+                          	con=con+"<p>";
+                          	con=con+"记录时间："+time;
+                          	con=con+"</p>";
+                          	con=con+"</li>";
+                          	                 }
+                           
+                           $("#list").empty().append(con).listview('refresh');
+                                       },
+           error: function (response) {console.log(response.responseText);}
+           }); 
+             $(document).ready(function(){tiao();thoo(); });                
+});
+      
+//点击待上报请求数据并显示
+  $("#be_reported").click(function(){
+ 	$.ajax({
+           url:"http://webapi.vikvon.com:80/Device/GetDevicePatrolList?type=2",
+           type:"get",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",       
+           success: function (response){
+                         var con='';
+                          var data = response.data;
+                          for (var l in data){
+                          	var ti = eval("data["+l+"].shortTitle");
+                          	var idd=eval("data["+l+"].id");
+                          	var time=eval("data["+l+"].reportTime");
+                          	con=con+"<li class='tocuh' id='"+idd+"'>";
+                          	con=con+"<a data-role='button'>";
+                          	con=con+ti;
+                          	con=con+"</a>";
+                          	con=con+"<p>";
+                          	con=con+"记录时间："+time;
+                          	con=con+"</p>";
+                          	con=con+"</li>";
+                          	                 }
+                           $("#list").empty().append(con).listview('refresh');
+                                       },
+           error: function (response) {console.log(response.responseText);}
+           });
+            $(document).ready(function(){tiao();thoo(); });                                
+});
+
+//点击待处理请求数据并显示
+  $("#be_processed").click(function(){
+ 	$.ajax({
+           url:"http://webapi.vikvon.com:80/Device/GetDevicePatrolList?type=3",
+           type:"get",
+           beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+           async:false,
+           dataType: "json",       
+           success: function (response){
+                          var con='';
+                          var data = response.data;
+                          for (var l in data){
+                          	var ti = eval("data["+l+"].shortTitle");
+                          	var idd=eval("data["+l+"].id");
+                          	var time=eval("data["+l+"].reportTime");
+                          	con=con+"<li class='tocuh' id='"+idd+"'>";
+                          	con=con+"<a data-role='button'>";
+                          	con=con+ti;
+                          	con=con+"</a>";
+                          	con=con+"<p>";
+                          	con=con+"记录时间："+time;
+                          	con=con+"</p>";
+                          	con=con+"</li>";
+                          	                 }
+                           $("#list").empty().append(con).listview('refresh');
+                                       },
+           error: function (response) {console.log(response.responseText);}
+           });
+             $(document).ready(function(){tiao();thoo(); });  
+});
+
+ 
+ // 获取nanhuAPPFile目录   
+function gotFS(fileSystem) {
+     newFile = fileSystem.root.getDirectory("nanhuAPPFile",null,readerFile,fail);        
+       }    
+//获取nanhuAPPFile目录下面的nanhuAPPtoken.txt文件
+function readerFile(newFile) {
+     newFile.getFile("nanhuAPPtoken.txt",null,gotFileEntry,fail);    
+       }    
+function gotFileEntry(fileEntry) {
+     fileEntry.file(gotFile,fail);    
+       }   
+function gotFile(file){ 
+     readAsText(file);   
+       }    
+function readAsText(file) {
+     var reader = new FileReader();   
+     reader.onloadend = function(txt) {  
+        token=txt.target.result;
+        ajaxjiazai();
+                };   
+           reader.readAsText(file);
+            }     
+function fail(txt) { 
+       console.log(txt.target.error.code);   
+            } 
+//跳转设备巡检详情页面
+function tiao(){
+         $(".tocuh").click(function(){  
+             var ll=$(this).attr("id");
+	         location.href="SBXQ.html?id="+ll;
+	         });	
+	         
+} 
+//关注或删除设备巡检记录
+function thoo(){
+         $(".tocuh").on("taphold", function() {
+            aba=$(this).attr("id");
+            $("[data-role='footer']").attr("style","display:block;");
+            $(".caa").unbind('click').bind('click',(function(){
+                  aaa=$(this).attr("ide");
+                  //关注
+                 if(aaa=="Focus"){
+                    $.ajax({
+                      url:"http://webapi.vikvon.com:80/Device/FollowRecord?recordId="+aba,
+                      type:"post",
+                      beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+                      async:false,
+                      data:aba,
+                      contentType: "application/json; charset=utf-8",
+                      success: function (response)  {
+                            console.log(response);
+                            if(response.message==null){
+                                    window.plugins.toast.shortshow( "关注成功！" );
+                                    $("[data-role='footer']").attr("style","display:none;");
+                                                      }
+                             else{
+                                    window.plugins.toast.shortshow(response.massage);
+                                    $("[data-role='footer']").attr("style","display:none;");
+                                                           }
+                                                    },
+                      error: function (response) {
+                            console.log(response.responseText);
+                                                 },
+                      dataType: "json",
+                    });  
+                                 }
+                                                              }));
+          });
+}
+</script>
+</html>

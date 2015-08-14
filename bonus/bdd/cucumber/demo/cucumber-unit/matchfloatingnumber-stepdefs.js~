@@ -1,0 +1,21 @@
+var test = function() {
+        var self = this;
+
+	this.When(/^I type "([^"]*)"$/, function (input, callback) {
+          self.input = input
+	  callback();
+	});
+
+	this.Then(/^should match$/, function (callback) {
+          var reg = /(\+|\-)?[0-9]+(\.[0-9]*)?/;
+          if ( reg.test(self.input) ) { 
+               console.log("SUCCESS");
+          } else {
+               callback.fail(self.input + " is not a floating number");
+          }
+ 	  callback();
+	});
+}
+
+// This is the javascript step definition library for cucumber features.
+module.exports = test;

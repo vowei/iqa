@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>登录验证</title>
+<script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile-1.3.2.css">
+<script type="text/javascript" charset="utf-8" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/BaiduLoc.js"></script>
+<script type="text/javascript" src="../js/Toast-Plugin.js"></script>
+</head>
+<body>
+<div data-role="page" id="page">
+	 	<div data-role="header" data-position="fixed" data-theme="a">
+ 	 		<h1>登录</h1>
+	 	</div>
+	 	
+	 	<div data-role="content">
+	 	<form>
+             <fieldset>
+              <ul data-role="listview" data-inset="true">
+               <li data-role="fieldcontain">
+               <label for="UserName">账号：</label>
+               <input name="UserName" id="UserName"  value="" type="text" required="required" onchange="upp(this.id)">
+               </li>
+               </ul>
+               <ul data-role="listview" data-inset="true">
+               <li data-role="fieldcontain">
+               <label for="password">密码：</label>
+               <input name="Password" id="Password" value="9WZ2xQzP" type="password" required="required">
+               </li>
+               </ul>
+               <ul data-role="listview" data-inset="true" id="SS" style="display:none;">
+               <li data-role="fieldcontain">
+               <label for="Sex">人车选择：</label>
+                    <select name="Sex" class="Sex" id="Sex" data-role="slider" data-mini="ture">
+                        <option value="P" selected="selected">城管人员</option>
+                        <option value="C">巡检车辆</option>
+                    </select>
+               </li>
+               </ul>
+               <ul data-role="listview" data-inset="true" id="carx" style="display:none;">
+                   <li data-role="fieldcontain">
+                   <label for="car"><font size="3">车辆号牌：</font></label>
+                   <select name="car" id="car">
+                   <option selected="selected">--请选择--</option>
+                   </select>
+                   </li>
+               </ul>
+               <ul data-role="listview" data-inset="true">
+               <li data-role="fieldcontain">
+               <input type="button" name="button" id="button" value="登录" data-inline="true">
+               <input type="reset" name="reset" id="reset" value="重置" data-inline="true">
+               </li>
+               </ul>
+             </fieldset>
+             </form>
+        </div>
+     </div>
+</body>
+<script type="text/javascript">
+var token;
+var channelid;
+var userid;
+function upp(x){
+     var name=document.getElementById(x).value;
+     if(name.length!=0){
+    document.getElementById("SS").style.display="block";
+     }else{
+         document.getElementById("SS").style.display="none";
+         document.getElementById("carx").style.display="none";
+     }
+}
+     $(".Sex").change(function(){
+          var obj=document.getElementById("Sex").value;
+          if(obj=="P"){
+               document.getElementById("carx").style.display="none";
+          }else{
+               var name=document.getElementById("UserName").value;
+               document.getElementById("carx").style.display="block";
+               $.ajax({
+                  type:"get",
+                  url:"http://webapi.vikvon.com:80/Unified/GetAllPatrolCars",
+                  async:false,
+                  dataType: "json",
+                  contentType: "application/json; charset=utf-8",
+                  success: function (response)  {
+                        if(response.message==null){
+                            var data = response.data;
+                            for (var l in data){};
+                            if(l<1){
+                              var con="<option selected='selected' value='请选择'>--请选择--</option>";
+                              for (var l in data){
+                          	var name = eval("data["+l+"].seriesNo");
+                          	var id=eval("data["+l+"].id");
+                          	con=con+"<option value='"+id+"'>";
+                          	con=con+name+"</option>";
+                          	                 }
+                           document.getElementById("carx").style.display="block";
+                           $("#car").empty().append(con).listview('refresh');
+                            }else{
+                              var con="<option selected='selected' value='请选择'>--请选择--</option>";
+                              for (var l=0; l in data; l++){
+                          	var name = eval("data["+l+"].seriesNo");
+                          	var id=eval("data["+l+"].id");
+                          	con=con+"<option value='"+id+"'>";
+                          	con=con+name+"</option>";
+                          	                 }
+                           document.getElementById("carx").style.display="block";                    
+                           $("#car").empty().append(con).listview('refresh');
+                          }      
+                    }else{} 
+                },
+              error: function (response) {
+                    console.log(response.responseText);
+            },
+             dataType: "json",   
+     });
+          }
+          
+     });
+
+          
+$("#button").click(function(){
+       var name=document.getElementById("UserName").value;
+       var pwd=document.getElementById("Password").value;
+       var obj=document.getElementById("Sex").value;
+       var carnum=document.getElementById("car").value;
+       if(obj=="P"){
+            $.ajax({
+               type:"post",
+               url:"http://webapi.vikvon.com:80/Account/Login",
+               data: JSON.stringify({PhoneNumber:name,SignUpKey:pwd,ExtFiled3:obj}),
+               contentType: "application/json; charset=utf-8",
+               success: function (response){
+                    if(response.message!=null){
+                         alert(response.message);
+                    navigator.notification.alert('用户名或密码错误！',null,'登录提示','确定'); 
+                    }
+                    else{
+                     token=response.data.access_token;
+                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+                        }
+                                           },
+               error: function (response) {console.log(response.responseText);},
+               dataType: "json"
+             });                 
+       }else{
+            $.ajax({
+               type:"post",
+               url:"http://webapi.vikvon.com:80/Account/Login",
+               data: JSON.stringify({PhoneNumber:name,SignUpKey:pwd,ExtFiled3:obj,CarSeriesNo:carnum}),
+               contentType: "application/json; charset=utf-8",
+               success: function (response){
+                    if(response.message!=null){
+                         alert(response.message);
+                    navigator.notification.alert('用户名或密码错误！',null,'登录提示','确定'); 
+                    }
+                    else{
+                     token=response.data.access_token;
+                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+                        }
+                                           },
+               error: function (response) {console.log(response.responseText);},
+               dataType: "json"
+             });
+       }
+});
+       
+ //获取nanhuAPPFile目录，如果不存在则创建该目录    
+function gotFS(fileSystem){    
+         newFile = fileSystem.root.getDirectory("nanhuAPPFile", {create : true,exclusive : false}, writerFile, fail);         
+                          }    
+//获取nanhuAPPFile目录下面的nanhuAPPtoken.txt文件，如果不存在则创建此文件    
+function writerFile(newFile){    
+         newFile.getFile("nanhuAPPtoken.txt", {create : true,exclusive : false}, gotFileEntry, fail);    
+                            }    
+function gotFileEntry(fileEntry){    
+         fileEntry.createWriter(gotFileWriter, fail);    
+                                }    
+function gotFileWriter(writer) {   
+         //onwrite：当写入成功完成后调用的回调函数   
+         writer.onwrite = function(evt){
+         window.plugins.toast.shortshow("登录成功！"); 
+         bandin();   
+                   
+                                       };   
+         writer.seek(0); //相当于文件光标  
+         writer.write(token); //参数为要写入文件的内容   
+                               }    
+function fail(error){    
+         alert("Failed to retrieve file:" + error.code);    
+                    } 
+
+window.onload = function message(){
+	 cordova.exec(function a(r){
+	 	channelid=r.channelId;
+	 	userid=r.userId;
+	 }, function b(r){
+	 	alert(r);
+	 }, "MessagePlugin", "message", []);
+}
+function bandin(){
+     $.ajax({
+          type:"post",
+               url:"http://webapi.vikvon.com:80/Account/BindBaiduPuahId2User?userId="+userid+"&channelId="+channelid,
+               beforeSend: function(request) {request.setRequestHeader("Authorization", "Bearer "+token);},
+               contentType: "application/json; charset=utf-8",
+               success: function (response){
+                   location.href="home_page.html";
+                                           },
+               error: function (response) {console.log(response.responseText);},
+               dataType: "json"
+     });
+}
+
+
+ function dingwei() {
+    window.plugins.PGBdLocation.getlocation(function(data){      
+       var loc = JSON.parse(data);  
+       alert("经纬度:"+loc.Latitude+","+loc.Longitude+" 地址:"+loc.AddrStr+"城市/地区:"+loc.City+","+loc.District);
+   }, function (error) {
+       alert(error);
+   });
+}
+
+function stopdingwei() {
+    window.plugins.PGBdLocation.stoploc(function(data){
+       alert(data);
+    }, function (error) {
+       alert(error);
+    });
+}
+
+</script>
+</html>

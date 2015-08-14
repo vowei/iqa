@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.0.5312 report, generated Thu Jul 23 16:37:40 CST 2015 -->
+
+<report>
+  <stats>
+    <packages value="1"/>
+    <classes value="13"/>
+    <methods value="36"/>
+    <srcfiles value="5"/>
+    <srclines value="186"/>
+  </stats>
+  <data>
+    <all name="all classes">
+      <coverage type="class, %" value="92%  (12/13)"/>
+      <coverage type="method, %" value="81%  (29/36)"/>
+      <coverage type="block, %" value="75%  (764/1023)"/>
+      <coverage type="line, %" value="73%  (136/186)"/>
+
+      <package name="cn.hzbook.android.test.chapter1">
+        <coverage type="class, %" value="92%  (12/13)"/>
+        <coverage type="method, %" value="81%  (29/36)"/>
+        <coverage type="block, %" value="75%  (764/1023)"/>
+        <coverage type="line, %" value="73%  (136/186)"/>
+
+        <srcfile name="EditFlags.java">
+          <coverage type="class, %" value="0%   (0/1)"/>
+          <coverage type="method, %" value="0%   (0/1)"/>
+          <coverage type="block, %" value="0%   (0/3)"/>
+          <coverage type="line, %" value="0%   (0/1)"/>
+
+          <class name="EditFlags">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/1)"/>
+            <coverage type="block, %" value="0%   (0/3)"/>
+            <coverage type="line, %" value="0%   (0/1)"/>
+
+            <method name="EditFlags (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="BookEditor.java">
+          <coverage type="class, %" value="100% (2/2)"/>
+          <coverage type="method, %" value="100% (5/5)"/>
+          <coverage type="block, %" value="58%  (149/258)"/>
+          <coverage type="line, %" value="61%  (37/61)"/>
+
+          <class name="BookEditor">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (3/3)"/>
+            <coverage type="block, %" value="56%  (138/247)"/>
+            <coverage type="line, %" value="60%  (36/60)"/>
+
+            <method name="onCreate (Bundle): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="32%  (28/88)"/>
+              <coverage type="line, %" value="35%  (8/23)"/>
+            </method>
+            <method name="onList (View): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="69%  (107/156)"/>
+              <coverage type="line, %" value="75%  (27/36)"/>
+            </method>
+            <method name="BookEditor (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+          <class name="BookEditor$1">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (2/2)"/>
+            <coverage type="block, %" value="100% (11/11)"/>
+            <coverage type="line, %" value="100% (2/2)"/>
+
+            <method name="BookEditor$1 (BookEditor): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="onClick (View): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (5/5)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="BookDetails.java">
+          <coverage type="class, %" value="100% (6/6)"/>
+          <coverage type="method, %" value="80%  (12/15)"/>
+          <coverage type="block, %" value="78%  (202/260)"/>
+          <coverage type="line, %" value="85%  (45/53)"/>
+
+          <class name="BookDetails$1">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="50%  (1/2)"/>
+            <coverage type="block, %" value="50%  (6/12)"/>
+            <coverage type="line, %" value="50%  (1/2)"/>
+
+            <method name="onClick (View): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="BookDetails$1 (BookDetails): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+          <class name="BookDetails$2">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="50%  (1/2)"/>
+            <coverage type="block, %" value="50%  (6/12)"/>
+            <coverage type="line, %" value="50%  (1/2)"/>
+
+            <method name="onClick (View): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="BookDetails$2 (BookDetails): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+          <class name="BookDetails$3">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="50%  (1/2)"/>
+            <coverage type="block, %" value="50%  (6/12)"/>
+            <coverage type="line, %" value="50%  (1/2)"/>
+
+            <method name="onClick (View): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="BookDetails$3 (BookDetails): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+          <class name="BookDetails">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (5/5)"/>
+            <coverage type="block, %" value="80%  (161/201)"/>
+            <coverage type="line, %" value="90%  (43/48)"/>
+
+            <method name="onEdit (View, int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="40%  (27/67)"/>
+              <coverage type="line, %" value="58%  (7/12)"/>
+            </method>
+            <method name="BookDetails (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="onBack (View): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (11/11)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+            <method name="onCreate (Bundle): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (112/112)"/>
+              <coverage type="line, %" value="100% (29/29)"/>
+            </method>
+            <method name="registerListener (int, View$OnClickListener): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (8/8)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+          </class>
+          <class name="BookDetails$4">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (2/2)"/>
+            <coverage type="block, %" value="100% (12/12)"/>
+            <coverage type="line, %" value="100% (2/2)"/>
+
+            <method name="BookDetails$4 (BookDetails): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="onClick (View): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+          <class name="BookDetails$5">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (2/2)"/>
+            <coverage type="block, %" value="100% (11/11)"/>
+            <coverage type="line, %" value="100% (2/2)"/>
+
+            <method name="BookDetails$5 (BookDetails): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="onClick (View): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (5/5)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="MainActivity.java">
+          <coverage type="class, %" value="100% (3/3)"/>
+          <coverage type="method, %" value="77%  (10/13)"/>
+          <coverage type="block, %" value="81%  (385/474)"/>
+          <coverage type="line, %" value="74%  (48/65)"/>
+
+          <class name="MainActivity$1">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="50%  (1/2)"/>
+            <coverage type="block, %" value="55%  (6/11)"/>
+            <coverage type="line, %" value="33%  (1/3)"/>
+
+            <method name="onClick (View): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/5)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="MainActivity$1 (MainActivity): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+          <class name="MainActivity">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="78%  (7/9)"/>
+            <coverage type="block, %" value="81%  (368/452)"/>
+            <coverage type="line, %" value="75%  (46/61)"/>
+
+            <method name="onChildClick (ExpandableListView, View, int, int, long): boolean">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/80)"/>
+              <coverage type="line, %" value="0%   (0/13)"/>
+            </method>
+            <method name="onDelete (View): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (162/162)"/>
+              <coverage type="line, %" value="100% (11/11)"/>
+            </method>
+            <method name="MainActivity (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="expandAllGroups (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (16/16)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+            <method name="getAuthors (): List">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (2/2)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getBooks (): List">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (2/2)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="onAdd (View): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (14/14)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+            <method name="onCreate (Bundle): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (166/166)"/>
+              <coverage type="line, %" value="100% (23/23)"/>
+            </method>
+          </class>
+          <class name="MainActivity$2">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (2/2)"/>
+            <coverage type="block, %" value="100% (11/11)"/>
+            <coverage type="line, %" value="100% (3/3)"/>
+
+            <method name="MainActivity$2 (MainActivity): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="onClick (View): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (5/5)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="TheSimpleExpandableListAdapter.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="100% (2/2)"/>
+          <coverage type="block, %" value="100% (28/28)"/>
+          <coverage type="line, %" value="100% (6/6)"/>
+
+          <class name="TheSimpleExpandableListAdapter">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (2/2)"/>
+            <coverage type="block, %" value="100% (28/28)"/>
+            <coverage type="line, %" value="100% (6/6)"/>
+
+            <method name="TheSimpleExpandableListAdapter (Context, List, int, String [], int [], List, int, String [], int []): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (12/12)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
+            </method>
+            <method name="getGroupView (int, boolean, View, ViewGroup): View">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (16/16)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+          </class>
+        </srcfile>
+      </package>
+    </all>
+  </data>
+</report>

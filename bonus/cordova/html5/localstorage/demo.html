@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Local Storage Demo</title>
+</head>
+<body>
+    <script type="text/javascript">
+        if ( window.localStorage && window.localStorage.length > 0 ) {
+            alert(window.localStorage["demo"]);
+        } else if ( window.localStorage ) {
+            window.localStorage["demo"] = "hello, local storage";
+        } else {
+            alert("local storage is not supported!")
+        }
+    </script>
+</body>
+</html>

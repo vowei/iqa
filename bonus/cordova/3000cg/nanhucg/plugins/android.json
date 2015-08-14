@@ -1,0 +1,172 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"PGBdLocation\"><param name=\"android-package\" value=\"com.vikvon.nanhucg.PGBdLocation\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Battery\"><param name=\"android-package\" value=\"org.apache.cordova.batterystatus.BatteryListener\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Accelerometer\"><param name=\"android-package\" value=\"org.apache.cordova.devicemotion.AccelListener\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Compass\"><param name=\"android-package\" value=\"org.apache.cordova.deviceorientation.CompassListener\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ToastPlugin\"><param name=\"android-package\" value=\"com.hy.todos.plugins.ToastPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MessagePlugin\"><param name=\"android-package\" value=\"com.hy.todos.plugins.MessagePlugin\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 3
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "baiduloc": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-battery-status": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        },
+        "toast": {
+            "PACKAGE_NAME": "com.vikvon.nanhucg"
+        }
+    },
+    "dependent_plugins": {}
+}

@@ -1,0 +1,20 @@
+＃ 运行包含 bvt 的功能
+cucumber.js --tags @bvt tests/features -r tests/features/step-definitions/
+
+# 运行包含 登录 的场景
+cucumber.js --tags @登录 tests/features/ -r tests/features/step-definitions/
+
+cucumber.js --tags @压力测试 tests/features -r tests/features/step-definitions/
+
+# 运行不包含 压力测试 的场景
+cucumber.js --tags ~@压力测试 tests/features -r tests/features/step-definitions/
+
+＃ 运行 bvt 功能里的 压力测试 场景
+cucumber.js --tags @bvt --tags @压力测试 tests/features -r tests/features/step-definitions/
+
+# 运行第一个有 @e2e 和 @登录 tag的场景 (AND 的关系)
+cucumber.js --tags @e2e --tags @登录 tests/features/ -r tests/features/step-definitions/
+
+# 运行同时有 @e2e 和 @登录 tag的场景 (OR 的关系)
+cucumber.js --tags @e2e,@登录 tests/features/ -r tests/features/step-definitions/
+

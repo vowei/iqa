@@ -1,0 +1,122 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"BaiduPush\"><param name=\"android-package\" value=\"com.phonegap.plugins.baidupushservice.PushService\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_DOWNLOAD_MANAGER\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.DOWNLOAD_WITHOUT_NOTIFICATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.DISABLE_KEYGUARD\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<receiver android:name=\"com.phonegap.plugins.baidupushservice.PushMessageReceiver\"><intent-filter><action android:name=\"com.baidu.android.pushservice.action.MESSAGE\" /><action android:name=\"com.baidu.android.pushservice.action.RECEIVE\" /><action android:name=\"com.baidu.android.pushservice.action.notification.CLICK\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:name=\"com.baidu.android.pushservice.PushServiceReceiver\" android:process=\":bdservice_v1\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /><action android:name=\"android.net.conn.CONNECTIVITY_CHANGE\" /><action android:name=\"com.baidu.android.pushservice.action.notification.SHOW\" /><action android:name=\"com.baidu.android.pushservice.action.media.CLICK\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:name=\"com.baidu.android.pushservice.RegistrationReceiver\" android:process=\":bdservice_v1\"><intent-filter><action android:name=\"com.baidu.android.pushservice.action.METHOD\" /><action android:name=\"com.baidu.android.pushservice.action.BIND_SYNC\" /></intent-filter><intent-filter><action android:name=\"android.intent.action.PACKAGE_REMOVED\" /><data android:scheme=\"package\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:exported=\"true\" android:name=\"com.baidu.android.pushservice.PushService\" android:process=\":bdservice_v1\"><intent-filter><action android:name=\"com.baidu.android.pushservice.action.PUSH_SERVICE\" /></intent-filter></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"api_key\" android:value=\"请到百度开发者平台上获取\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.example.chengguan"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.example.chengguan"
+        },
+        "com.phonegap.plugins.baidupushservice": {
+            "PACKAGE_NAME": "com.example.chengguan"
+        }
+    },
+    "dependent_plugins": {}
+}
